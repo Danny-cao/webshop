@@ -14,8 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 </head>
@@ -34,7 +34,7 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="./index.html">
+            <a href="fakeindex.html">
               <i class="nc-icon nc-shop"></i>
               <p>Home</p>
             </a>
@@ -43,20 +43,20 @@
             <p>&nbsp; Categories</p>
           </a>
         </li>
-        <li class="active">
-          <a href="./category.html">
+        <li>
+          <a href="./categorySweater.html">
             <i class="nc-icon nc-tag-content"></i>
             <p>Sweater</p>
           </a>
         </li>
         <li>
-          <a href="./category.html">
+          <a href="./categoryHoodie.html">
             <i class="nc-icon nc-tag-content"></i>
             <p>Hoodie</p>
           </a>
         </li>
-        <li>
-          <a href="./category.html">
+        <li class="active">
+          <a href="./categoryTshirt.html">
             <i class="nc-icon nc-tag-content"></i>
             <p>T-Shirt</p>
           </a>
@@ -76,7 +76,7 @@
               <span class="navbar-toggler-bar bar3"></span>
             </button>
           </div>
-          <a class="navbar-brand" href="./category.html">Sweaters</a>
+          <a class="navbar-brand" href="./category.html">T-shirt</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -96,7 +96,7 @@
           </form>
           <ul class="navbar-nav">
             <li class="nav-item btn-rotate dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="nc-icon nc-single-02"></i>
                 <p>
                   <span class="d-lg-none d-md-block">Account</span>
@@ -108,7 +108,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn-rotate" href="./shoppingCart.html">
+              <a class="nav-link btn-rotate" href="shoppingCart.html">
                 <i class="nc-icon nc-cart-simple"></i>
                 <p>
                   <span class="d-lg-none d-md-block">Shopping Cart</span>
@@ -129,7 +129,7 @@
 <div class="content">
   <div class="row">
     <!-- Start of Card 1 -->
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-lg-12 col-md-6 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
@@ -137,120 +137,81 @@
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-title">Sweater 1</p>
-                <p class="card-category">Picture here</p>
+                <p class="card-title">A-COLD-WALL* LOGO MOCK NECK TEE</p>
+                <div class="float-left">
+                  <img src="https://media.endclothing.com/media/f_auto,w_400,h_400/prodmedia/media/catalog/product/0/6/06-03-2019_acoldwall_logomocknecktee_black_cw9smh18acte187-999_th_1.jpg">
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer ">
+        <div class="card-footer">
           <hr>
           <div class="stats">
-            $30,00
+            €199,00
             <div class="float-right">
-              <a href="./product.html" class="btn btn-primary">Open</a>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Size
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#"></a>
+                  <a class="dropdown-item" href="#">Small</a>
+                  <a class="dropdown-item" href="#">Medium</a>
+                  <a class="dropdown-item" href="#">Large</a>
+                  <a class="dropdown-item" href="#">X-Large</a>
+                  <a class="dropdown-item" href="#">XX-Large</a>
+                </div>
+              </div>
+              <br><br>
+              <a href="./product.html" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- End of Card 1 -->
-    <!-- Start of Card 2 -->
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-body ">
-          <div class="row">
-            <div class="col-5 col-md-4">
-            </div>
-            <div class="col-7 col-md-8">
-              <div class="numbers">
-                <p class="card-title">Sweater 2</p>
-                <p class="card-category">Picture here</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            $30,00
-            <div class="float-right">
-              <a href="./product.html" class="btn btn-primary">Open</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End of Card 2 -->
-    <!-- Start of Card 3 -->
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="card card-stats">
-        <div class="card-body ">
-          <div class="row">
-            <div class="col-5 col-md-4">
-            </div>
-            <div class="col-7 col-md-8">
-              <div class="numbers">
-                <p class="card-title">Sweater 3</p>
-                <p class="card-category">Picture here</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            $30,00
-            <div class="float-right">
-              <a href="./product.html" class="btn btn-primary">Open</a>
-            </div>
+    <footer class="footer footer-black  footer-white ">
+      <div class="container-fluid">
+        <div class="row">
+          <nav class="footer-nav">
+            <ul>
+              <li>
+                <a>WAC Team 3</a>
+              </li>
+              <li>
+                <a>Webshop</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="credits ml-auto">
+            <span class="copyright">
+              ©
+              <script>
+                document.write(new Date().getFullYear())
+              </script>, made with <i class="fa fa-heart heart"></i> by Team 3
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   </div>
-</div>
-<footer class="footer footer-black  footer-white ">
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="footer-nav">
-        <ul>
-          <li>
-            <a>WAC Team 3</a>
-          </li>
-          <li>
-            <a>Webshop</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="credits ml-auto">
-        <span class="copyright">
-          ©
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="fa fa-heart heart"></i> by Team 3
-        </span>
-      </div>
-    </div>
-  </div>
-</footer>
-</div>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script src="assets/js/core/jquery.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <!--  Google Maps Plugin    -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chart JS -->
-<script src="../assets/js/plugins/chartjs.min.js"></script>
+<script src="assets/js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+<script src="assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/demo/demo.js"></script>
+<script src="assets/demo/demo.js"></script>
 <script>
   $(document).ready(function() {
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
