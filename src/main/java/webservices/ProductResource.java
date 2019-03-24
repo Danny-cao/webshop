@@ -12,7 +12,7 @@ import javax.ws.rs.Produces;
 import persistence.Product;
 
 @Path("/products")
-public class ProductRecource {
+public class ProductResource {
 	@GET
 	@Produces("application/json")
 	public String allProducts() {
