@@ -1,23 +1,46 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" type="text/css" href="css/Login-page.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <br><br>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Bootstrap -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/general-page.css">
+  <link rel="stylesheet" type="text/css" href="css/login-page.css">
+  <title>Login</title>
+</head>
+<body>
+  <!-- Login Form -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-5 centered">
+        <div class="card">
+          <div class="card-body">
+            <center>
+              <form>
+                <h2>Webshop!</h2>
+                <hr>
+                <input type="text" class="form-control" required name="username" placeholder="username">
+                <input type="password" class="form-control" required name="password" placeholder="password"> 
+                <hr>
+                <input type="submit" class="btn btn-primary" value="Log In">
+              </form>
+            </center>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Made by Team 3</small>
+          </div>
         </div>
-
-    <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
+      </div>
+    </div>
   </div>
-</div>
+
+
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <!-- Own jQuery -->
+  <script src="js/login-page.js"></script>
+  <script></script>
+</body>
+</html>
