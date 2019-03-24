@@ -16,6 +16,7 @@ public class ProductRecource {
 	@GET
 	@Produces("application/json")
 	public String allProducts() {
+		// comment voor de commit
 		ProductService service = ServiceProvider.getProductService();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 		for (Product p : service.getAllProducts()) {
