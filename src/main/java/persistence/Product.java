@@ -6,14 +6,14 @@ public class Product{
 	private String name;
 	private int id;
 	private int price;
-	private String beschrijving;
+	private String description;
 	
 	
-	public Product(int newId, String newName, int newPrice, String beschrijving) {
-		id = newId;
-		name = newName;
-		price = newPrice;
-		this.beschrijving = beschrijving;
+	public Product(int newId, String newName, int newPrice, String newDescription) {
+		this.id = newId;
+		this.name = newName;
+		this.price = newPrice;
+		this.description = newDescription;
 	}
 
 	public String getName() {
@@ -28,8 +28,8 @@ public class Product{
 		return price;
 	}
 
-	public String getBeschrijving() {
-		return beschrijving;
+	public String getDescription() {
+		return description;
 	}
 
 }

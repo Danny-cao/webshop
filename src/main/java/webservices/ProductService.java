@@ -10,5 +10,17 @@ public class ProductService {
 	public List<Product> getAllProducts(){
 		return pobd.findAll();
 	}
+	
+	public List<Product> getProductsByCategory(String category){
+		return pobd.findByCategory(category);
+	}
+	
+	public List<String> getAllCategories(){
+		return pobd.findAllCategories();
+	}
+
+	public List<Product> getAllProductsOnSale() {
+		return pobd.findAllOnSale();
+	}
 }
 
