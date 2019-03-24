@@ -15,7 +15,8 @@ public class ProductOracleBaseDAOImpl extends OracleBaseDAO implements ProductDA
 				int id = dbResultSet.getInt("id");
 				String name = dbResultSet.getString("naam");
 				int price = dbResultSet.getInt("prijs");
-				Product prod = new Product(id,name,price);
+				String beschrijving = dbResultSet.getString("beschrijving");
+				Product prod = new Product(id,name,price, beschrijving);
 				products.add(prod);
 			}
 		} catch (Exception e) {

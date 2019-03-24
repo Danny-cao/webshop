@@ -6,12 +6,14 @@ public class Product{
 	private String name;
 	private int id;
 	private int price;
+	private String beschrijving;
 	
 	
-	public Product(int newId, String newName, int newPrice) {
+	public Product(int newId, String newName, int newPrice, String beschrijving) {
 		id = newId;
 		name = newName;
 		price = newPrice;
+		this.beschrijving = beschrijving;
 	}
 
 	public String getName() {
@@ -24,6 +26,10 @@ public class Product{
 	
 	public int getPrice() {
 		return price;
+	}
+
+	public String getBeschrijving() {
+		return beschrijving;
 	}
 
 }
