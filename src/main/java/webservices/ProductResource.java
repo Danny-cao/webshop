@@ -24,7 +24,7 @@ public class ProductResource {
 			con.add("name", p.getName());
 			con.add("id", p.getId());
 			con.add("price", p.getPrice());
-			con.add("beschrijving", p.getBeschrijving());
+			con.add("description", p.getBeschrijving());
 			jab.add(con);
 		}
 

@@ -6,7 +6,12 @@
 	<!-- Fonts and Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+	<link href="assets/css/animate.min.css" rel="stylesheet"/>
+
+
+	<!-- Own styling -->
 	<link rel="stylesheet" type="text/css" href="css/general-page.css">
+
 
 	<title>Team 3 Webshop</title>
 </head>
@@ -42,66 +47,8 @@
 	</nav>
 	<h1>Sale</h1>
 	<hr>
-	<div class="row">
-		<div class="col-md-3">
-			<div class="card">
-				<img class="card-img-top" src="pictures/t-shirt01.jpeg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">White t-shirt</h5>
-					<p class="card-text">Leuk shirtje i guess</p>
-					<hr>
-					<p class="card-text">€30,00</p>
-					<a href="product.html" class="btn btn-primary">Open</a>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted">Sale ends at: 23-05-2019</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<img class="card-img-top" src="pictures/t-shirt01.jpeg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">Black t-shirt</h5>
-					<p class="card-text">Leuk shirtje i guess</p>
-					<hr>
-					<p class="card-text">€30,00</p>
-					<a href="product.html" class="btn btn-primary">Open</a>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted">Sale ends at: 23-05-2019</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<img class="card-img-top" src="pictures/t-shirt01.jpeg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">White Hoodie</h5>
-					<p class="card-text">Leuk shirtje i guess</p>
-					<hr>
-					<p class="card-text">€450,00</p>
-					<a href="product.html" class="btn btn-primary">Open</a>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted">Sale ends at: 23-05-2019</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<img class="card-img-top" src="pictures/t-shirt01.jpeg" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">White Sweater</h5>
-					<p class="card-text">Leuk shirtje i guess</p>
-					<hr>
-					<p class="card-text">€40,00</p>
-					<a href="product.html" class="btn btn-primary">Open</a>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted">Sale ends at: 23-05-2019</small>
-				</div>
-			</div>
+	<div class="content">
+		<div class="row">		
 		</div>
 	</div>
 
@@ -115,7 +62,8 @@
 	<script src="assets/js/plugins/bootstrap-notify.js"></script>
 	<!-- Own jQuery -->
 	<script src="js/general-page.js"></script>
-	<script>addToDropdown();</script>
+	<script src="js/index-page.js"></script>
+	<script>addToDropdown(); addAllSaleProducts();</script>
 </body>
 
 </html>

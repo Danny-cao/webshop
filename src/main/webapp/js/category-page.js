@@ -1,6 +1,8 @@
-function addAllProducts(){
+function showCategory(){
+	var category = sessionStorage.getItem("category");
+
 	$.ajax({
-		url: 'restservices/products',
+		url: 'restservices/categories' + category,
 		type: 'GET',
 		dataType: 'json'
 	})
@@ -22,14 +24,10 @@ function addAllProducts(){
 		});
 	})
 	.fail(function() {
-		$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the products. Try it again in 10 minutes."},{type: "danger"});
+		$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the category. Try it again in 10 minutes."},{type: "danger"});
 	})
 	.always(function() {
 		console.log("complete");
 	});
 
-}
-
-function goToProductPage(id){
-	sessionStorage.setItem("id",id);
 }
