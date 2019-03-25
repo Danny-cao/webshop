@@ -29,7 +29,3 @@ function addAllProducts(){
 	});
 
 }
-
-function goToProductPage(id){
-	sessionStorage.setItem("id",id);
-}

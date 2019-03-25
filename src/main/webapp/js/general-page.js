@@ -1,10 +1,14 @@
 function getAllCategories(){
 	$.ajax({
-		url: '/path/to/file',
-		type: 'default GET'
+		url: 'restservices/categories',
+		type: 'GET'
 	})
-	.done(function() {
-		console.log("success");
+	.done(function(result) {
+		$.each(result, function(index, key) {
+			var category = String(key.category);
+			console.log(category);
+			$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"category.html\" onclick=\"goToCategoryPage("+"'"+ category +"'"+")\">"+key.category+"</a>" );
+		})
 	})
 	.fail(function() {
 		console.log("error");
@@ -14,8 +18,10 @@ function getAllCategories(){
 	});
 }
 
-function addToDropdown(){
-	$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"realcategories.html\">T-shirts</a>" );
-	$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"realcategories.html\">Hoodies</a>" );
-	$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"realcategories.html\">Sweaters</a>" );
+function goToCategoryPage(category){
+	sessionStorage.setItem("category",category);
+}
+
+function goToProductPage(id){
+	sessionStorage.setItem("id",id);
 }

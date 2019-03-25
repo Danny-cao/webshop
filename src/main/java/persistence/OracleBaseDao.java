@@ -20,7 +20,7 @@ public class OracleBaseDao {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
 
-    public void closeConnection(Connection conn) throws SQLException {
+    public void closeConnection(Connection conn) throws SQLException{
         conn.close();
     }
 }
