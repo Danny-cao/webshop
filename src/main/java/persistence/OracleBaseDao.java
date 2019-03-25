@@ -3,7 +3,7 @@ package persistence;
 import java.sql.*;
 
 
-public class OracleBaseDAO {
+public class OracleBaseDao {
 
     private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
     private static final String DB_URL = "jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC21";
@@ -13,9 +13,8 @@ public class OracleBaseDAO {
 	public Connection getConnection() throws SQLException {
         try {
             Class.forName(DB_DRIV);
-        }
-        catch (Exception e1) {
-            e1.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }

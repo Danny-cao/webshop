@@ -7,8 +7,10 @@ interface ProductDAO {
 	List<Product> findByCategory(String category);
 	Product findById(int id);
 	Product findByName(String name);
-	
-	boolean insertProduct();
-	boolean updateProduct();
-	boolean deleteProduct();
+
+	boolean insertProduct(Product product);
+
+	boolean updateProduct(Product product);
+
+	boolean deleteProduct(Product product);
 }

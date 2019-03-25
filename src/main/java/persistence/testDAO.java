@@ -3,7 +3,7 @@ package persistence;
 
 public class testDAO {
 	public static void main(String[] args){
-		ProductOracleBaseDAOImpl prodDAO = new ProductOracleBaseDAOImpl();
+		ProductOracleDAOImpl prodDAO = new ProductOracleDAOImpl();
 
 		for (Product p : prodDAO.findAllOnSale()) {
 			System.out.println(p.getName() + p.getPrice());
