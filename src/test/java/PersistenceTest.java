@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import persistence.Categorie;
 import persistence.Product;
 import persistence.ProductOracleDAOImpl;
 
@@ -55,7 +57,7 @@ public class PersistenceTest {
     @DisplayName("Should return all categories")
     void testGetCategories() {
         ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
-        List<String> categories = productDao.findAllCategories();
+        List<Categorie> categories = productDao.findAllCategories();
         assertNotNull(categories, "List of categories");
     }
 

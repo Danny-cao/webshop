@@ -80,13 +80,13 @@ public class ProductOracleDAOImpl extends OracleBaseDao implements ProductDAO {
         return products;
     }
 
-    public List<String> findAllCategories() {
-        List<String> categories = new ArrayList<String>();
+    public List<Categorie> findAllCategories() {
+        List<Categorie> categories = new ArrayList<Categorie>();
         try (Connection con = super.getConnection()) {
             Statement stmt = con.createStatement();
-            ResultSet dbResultSet = stmt.executeQuery("select distinct categorie from product");
+            ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving from categorie");
             while (dbResultSet.next()) {
-                categories.add(dbResultSet.getString("categorie"));
+                categories.add(new Categorie(dbResultSet.getString("naam"), dbResultSet.getString("omschrijving")));
             }
         } catch (Exception e) {
             e.printStackTrace();
