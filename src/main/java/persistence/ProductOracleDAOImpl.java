@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ProductOracleDAOImpl extends OracleBaseDao implements ProductDAO {
+public class ProductOracleDAOImpl extends BaseDao implements ProductDAO {
     public List<Product> findAllOnSale() {
         List<Product> products = new ArrayList<Product>();
         try (Connection con = super.getConnection()) {
