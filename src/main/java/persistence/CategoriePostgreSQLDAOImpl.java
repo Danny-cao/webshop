@@ -22,7 +22,7 @@ public class CategoriePostgreSQLDAOImpl extends PostgreSQLBaseDao implements Cat
             dbResultSet.next();
 
             String naam = dbResultSet.getString("naam");
-            String beschrijving = dbResultSet.getString("beschrijving");
+            String beschrijving = dbResultSet.getString("omschrijving");
             
             return new Categorie(naam, beschrijving);
             

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import model.Categorie;
 import model.Product;
+import persistence.CategoriePostgreSQLDAOImpl;
 import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
@@ -42,7 +43,6 @@ public class PersistenceTest {
         for (Product p : products) {
             int id = p.getId();
             String name = p.getName();
-            // TODO: Moet Double zijn
             double price = p.getPrice();
             String description = p.getDescription();
 
@@ -80,50 +80,42 @@ public class PersistenceTest {
         List<Product> products = productDao.findAll();
 
         Product p = products.get(0);
-        Product sameP = productDao.findByName(p.getName());
+        Product sameP = productDao.findSingleProductByName(p.getName());
 
         assertEquals(p, sameP, "Same product, different way of getting them (findAll / getByName)");
     }
 
     @Test
-    @DisplayName("Should insert new test product in database")
-    void testInsertProduct() {
-        Product testProduct = new Product(9999, "Test Product", 20, "Test");
+    @DisplayName("Should insert/update/delete new test product in database")
+    void testInsertUpdateDeleteProduct() {
+        CategoriePostgreSQLDAOImpl cpd = new CategoriePostgreSQLDAOImpl();
+
+        Product insertTestProduct = new Product("Test Product", 20, "Test");
+        insertTestProduct.setCategorie(cpd.findByName("shirt"));
 
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        productDao.insertProduct(testProduct);
-        Product sameTestProduct = productDao.findById(9999);
+        productDao.insertProduct(insertTestProduct);
+        Product sameInsertTestProduct = productDao.findSingleProductByName("Test Product");
+        insertTestProduct.setId(sameInsertTestProduct.getId());
 
-        assertEquals(testProduct, sameTestProduct, "Same 2 products, one created in Java then inserted in Database" +
+        assertEquals(insertTestProduct, sameInsertTestProduct, "Same 2 products, one created in Java then inserted in Database" +
                 ", other found in database using the name of the old product");
-    }
 
-    @Test
-    @DisplayName("Should update test product in database")
-    void testUpdateProduct() {
-        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        Product testProduct = productDao.findById(9999);
+        Product updateTestProduct = productDao.findSingleProductByName("Test Product");
 
-        testProduct.setName("Updated Test Product");
-        testProduct.setPrice(30);
-        testProduct.setDescription("Updated Test");
-        productDao.updateProduct(testProduct);
+        updateTestProduct.setName("Updated Test Product");
+        updateTestProduct.setPrice(30);
+        updateTestProduct.setDescription("Updated Test");
+        productDao.updateProduct(updateTestProduct);
 
-        Product sameTestProduct = productDao.findById(9999);
+        Product sameUpdateTestProduct = productDao.findSingleProductByName("Updated Test Product");
 
-        assertEquals(testProduct, sameTestProduct, "Same 2 products, one updated in Java then updated in Database" +
+        assertEquals(updateTestProduct, sameUpdateTestProduct, "Same 2 products, one updated in Java then updated in Database" +
                 ", other found in database using the name of the updated product");
+
+        Product deleteTestProduct = productDao.findSingleProductByName("Updated Test Product");
+        productDao.deleteProduct(deleteTestProduct);
+
+        assertNull(productDao.findSingleProductByName("Updated Test Product"), "Trying to find product that was deleted");
     }
-
-    @Test
-    @DisplayName("Should delete test product in database")
-    void testDeleteProduct() {
-        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        Product testProduct = productDao.findById(9999);
-        productDao.updateProduct(testProduct);
-
-        assertNull(productDao.findById(9999), "Trying to find product that was deleted");
-    }
-
-
 }

@@ -9,12 +9,18 @@ public class Product{
 	private Categorie categorie;
 
 
-	public Product(int newId, String newName, double newPrice, String newDescription) {
-		this.id = newId;
+    public Product(String newName, double newPrice, String newDescription) {
 		this.name = newName;
 		this.price = newPrice;
 		this.description = newDescription;
 	}
+
+    public Product(int id, String newName, double newPrice, String newDescription) {
+        this.id = id;
+        this.name = newName;
+        this.price = newPrice;
+        this.description = newDescription;
+    }
 
 	public String getName() {
 		return name;
@@ -35,6 +41,10 @@ public class Product{
 	public Categorie getCategorie() {
 		return categorie;
 	}
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 	public void setName(String name) {
 		this.name = name;

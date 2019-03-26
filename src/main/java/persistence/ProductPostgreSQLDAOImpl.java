@@ -54,13 +54,58 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     }
 
     public Product findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            Connection conn = super.getConnection();
+            CategoriePostgreSQLDAOImpl cpsd = new CategoriePostgreSQLDAOImpl();
+
+            String queryText = "SELECT naam, prijs, categorie, beschrijving FROM product WHERE id = ?;";
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+            System.out.println(result.next());
+
+            String naam = result.getString("naam");
+            Double prijs = result.getDouble("prijs");
+            Categorie categorie = cpsd.findByName(result.getString("categorie"));
+            String beschrijving = result.getString("beschrijving");
+
+            Product p = new Product(id, naam, prijs, beschrijving);
+            p.setCategorie(categorie);
+
+            conn.close();
+            return p;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public Product findByName(String name) {
-        // TODO Auto-generated method stub
-        return null;
+    public Product findSingleProductByName(String name) {
+        try {
+            Connection conn = super.getConnection();
+            CategoriePostgreSQLDAOImpl cpsd = new CategoriePostgreSQLDAOImpl();
+
+            String queryText = "SELECT id, prijs, categorie, beschrijving FROM product WHERE naam = ?;";
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setString(1, name);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+
+            int id = result.getInt("id");
+            Double prijs = result.getDouble("prijs");
+            Categorie categorie = cpsd.findByName(result.getString("categorie"));
+            String beschrijving = result.getString("beschrijving");
+
+            Product p = new Product(id, name, prijs, beschrijving);
+            p.setCategorie(categorie);
+
+            conn.close();
+            return p;
+        } catch (SQLException e) {
+            System.out.println("Product with name not found");
+            return null;
+        }
     }
 
     public List<Product> findByCategory(String category) {
@@ -163,6 +208,4 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             return false;
         }
     }
-
-
 }
