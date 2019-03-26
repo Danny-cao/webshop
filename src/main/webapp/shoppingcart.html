@@ -53,14 +53,6 @@
 							<th>Price</th>
 							<th></th>
 						</thead>
-						<tr id="1">
-							<td><p class="card-text">White t-shirt</p></td>
-							<td><input type="number" class="form-control col-md-6 amount" value="1" required name="amount"></td> 
-							<td><p class="subtotal"></p></td>
-							<td><button class="btn btn-warning edit" >Edit</button>
-								<button class="btn btn-danger delete">Delete</button>
-							</td>
-						</tr>
 					</table>
 					<hr>
 					<p id="total"></p>
@@ -71,15 +63,13 @@
 	</div>
 
 	<script src="assets/js/core/jquery.min.js"></script>
-	<script src="assets/js/core/popper.min.js"></script>
 	<script src="assets/js/core/bootstrap.min.js"></script>
-	<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="assets/js/plugins/bootstrap-notify.js"></script>
 	<!-- Own jQuery -->
 	<script src="js/general-page.js"></script>
 	<script src="js/shoppingcart-page.js"></script>
-	<script>getAllCategories(); calculateSubtotal(); calculateTotal(); setAmount();</script>
+	<script>getAllCategories(); addToCart(); deleteRow();</script>
 </body>
 
 </html>
