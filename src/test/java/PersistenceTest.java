@@ -2,9 +2,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import model.Categorie;
+import model.Category;
 import model.Product;
-import persistence.CategoriePostgreSQLDAOImpl;
+import persistence.CategoryPostgreSQLDAOImpl;
 import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
@@ -57,7 +57,7 @@ public class PersistenceTest {
     @DisplayName("Should return all categories")
     void testGetCategories() {
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        List<Categorie> categories = productDao.findAllCategories();
+        List<Category> categories = productDao.findAllCategories();
         assertNotNull(categories, "List of categories");
     }
 
@@ -88,10 +88,10 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should insert/update/delete new test product in database")
     void testInsertUpdateDeleteProduct() {
-        CategoriePostgreSQLDAOImpl cpd = new CategoriePostgreSQLDAOImpl();
+        CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
         Product insertTestProduct = new Product("Test Product", 20, "Test");
-        insertTestProduct.setCategorie(cpd.findByName("shirt"));
+        insertTestProduct.setCategory(cpd.findByName("shirt"));
 
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         productDao.insertProduct(insertTestProduct);

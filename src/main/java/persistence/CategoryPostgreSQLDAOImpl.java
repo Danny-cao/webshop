@@ -1,30 +1,30 @@
 package persistence;
 
-import model.Categorie;
+import model.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class CategoriePostgreSQLDAOImpl extends PostgreSQLBaseDao implements CategorieDAO {
+public class CategoryPostgreSQLDAOImpl extends PostgreSQLBaseDao implements CategoryDAO {
 	
 	
 	@Override
-	public Categorie findByName(String name) {
+	public Category findByName(String nm) {
 		
         try (Connection con = super.getConnection()) {
 
             String query = "select naam, omschrijving from categorie where naam = ?";
             PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, name);
+            stmt.setString(1, nm);
             ResultSet dbResultSet = stmt.executeQuery();
             dbResultSet.next();
 
-            String naam = dbResultSet.getString("naam");
-            String beschrijving = dbResultSet.getString("omschrijving");
+            String name = dbResultSet.getString("name");
+            String description = dbResultSet.getString("description");
             
-            return new Categorie(naam, beschrijving);
+            return new Category(name, description);
             
         } catch (Exception e) {
             e.printStackTrace();

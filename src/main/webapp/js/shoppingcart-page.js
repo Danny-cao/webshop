@@ -31,3 +31,5 @@ function calculateSubtotal() {
 	subtotal = 0;
 	calculateTotal();
 };
+
+

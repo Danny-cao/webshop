@@ -12,17 +12,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import model.Categorie;
+import model.Category;
 import model.Product;
 
-@Path("category")
+@Path("categories")
 public class CategoryResource {
 	@GET
 	@Produces("application/json")
 	public Response getAllCategories() {
 		ProductService service = ServiceProvider.getProductService();
 		
-		List<Categorie> cat = service.getAllCategories();
+		List<Category> cat = service.getAllCategories();
 		
 		return Response.ok(cat).build();
 	}

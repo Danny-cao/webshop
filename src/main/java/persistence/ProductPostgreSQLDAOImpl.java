@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Categorie;
+import model.Category;
 import model.Product;
 
 import java.sql.Connection;
@@ -56,7 +56,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     public Product findById(int id) {
         try {
             Connection conn = super.getConnection();
-            CategoriePostgreSQLDAOImpl cpsd = new CategoriePostgreSQLDAOImpl();
+            CategoryPostgreSQLDAOImpl cpsd = new CategoryPostgreSQLDAOImpl();
 
             String queryText = "SELECT naam, prijs, categorie, beschrijving FROM product WHERE id = ?;";
             PreparedStatement stmt = conn.prepareStatement(queryText);
@@ -66,11 +66,11 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
 
             String naam = result.getString("naam");
             Double prijs = result.getDouble("prijs");
-            Categorie categorie = cpsd.findByName(result.getString("categorie"));
+            Category category = cpsd.findByName(result.getString("categorie"));
             String beschrijving = result.getString("beschrijving");
 
             Product p = new Product(id, naam, prijs, beschrijving);
-            p.setCategorie(categorie);
+            p.setCategory(category);
 
             conn.close();
             return p;
@@ -83,7 +83,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     public Product findSingleProductByName(String name) {
         try {
             Connection conn = super.getConnection();
-            CategoriePostgreSQLDAOImpl cpsd = new CategoriePostgreSQLDAOImpl();
+            CategoryPostgreSQLDAOImpl cpsd = new CategoryPostgreSQLDAOImpl();
 
             String queryText = "SELECT id, prijs, categorie, beschrijving FROM product WHERE naam = ?;";
             PreparedStatement stmt = conn.prepareStatement(queryText);
@@ -94,11 +94,11 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
 
             int id = result.getInt("id");
             Double prijs = result.getDouble("prijs");
-            Categorie categorie = cpsd.findByName(result.getString("categorie"));
+            Category category = cpsd.findByName(result.getString("categorie"));
             String beschrijving = result.getString("beschrijving");
 
             Product p = new Product(id, name, prijs, beschrijving);
-            p.setCategorie(categorie);
+            p.setCategory(category);
 
             conn.close();
             return p;
@@ -130,13 +130,13 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         return products;
     }
 
-    public List<Categorie> findAllCategories() {
-        List<Categorie> categories = new ArrayList<Categorie>();
+    public List<Category> findAllCategories() {
+        List<Category> categories = new ArrayList<Category>();
         try (Connection con = super.getConnection()) {
             Statement stmt = con.createStatement();
             ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving from categorie");
             while (dbResultSet.next()) {
-                categories.add(new Categorie(dbResultSet.getString("naam"), dbResultSet.getString("omschrijving")));
+                categories.add(new Category(dbResultSet.getString("naam"), dbResultSet.getString("omschrijving")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,7 +156,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
 
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
-            stmt.setString(3, product.getCategorie().getNaam());
+            stmt.setString(3, product.getCategory().getName());
             stmt.setString(4, product.getDescription());
 
             boolean status = stmt.execute();
@@ -178,7 +178,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
-            stmt.setString(3, product.getCategorie().getNaam());
+            stmt.setString(3, product.getCategory().getName());
             stmt.setString(4, product.getDescription());
             stmt.setInt(5, product.getId());
 

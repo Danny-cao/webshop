@@ -1,6 +1,10 @@
-function showProduct(){
-	var id = sessionStorage.getItem("id");
+var id = sessionStorage.getItem("id");
 
+function hello(){
+	console.log("hello");
+}
+
+function showProduct(){
 	$.ajax({
 		url: 'restservices/products',
 		type: 'GET',
@@ -11,7 +15,7 @@ function showProduct(){
 			let currentProduct = result[index];
 			if(currentProduct['id'] == id){
 				var title = currentProduct.name;
-				var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\"pictures/t-shirt01.jpeg\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+currentProduct.description+"</p><hr><p>&euro;"+currentProduct.price+"</p><a href=\"#\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
+				var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\"pictures/t-shirt01.jpeg\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+currentProduct.description+"</p><hr><p>&euro;"+currentProduct.price+"</p><a onclick=\"addToStorage("+currentProduct.id+")\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
 				$("#title").text(title);
 				$(".row").append(product);
 			}
@@ -22,5 +26,31 @@ function showProduct(){
 	})
 	.always(function() {
 		console.log("complete");
-	});
+	})
+};
+
+
+function addToStorage(id){
+	var old = localStorage.getItem("item");
+	if(old === null){ 
+		old = "";
+	};
+	localStorage.setItem("item", old + "," + id);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

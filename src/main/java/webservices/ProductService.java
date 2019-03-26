@@ -1,16 +1,15 @@
 package webservices;
 
-import model.Categorie;
-import persistence.CategoriePostgreSQLDAOImpl;
+import model.Category;
 import model.Product;
+import persistence.CategoryPostgreSQLDAOImpl;
 import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
-import java.util.Locale;
 
 public class ProductService {
 	private ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
-	private CategoriePostgreSQLDAOImpl cad = new CategoriePostgreSQLDAOImpl();
+	private CategoryPostgreSQLDAOImpl cad = new CategoryPostgreSQLDAOImpl();
 	
 	public List<Product> getAllProducts(){
 		return pobd.findAll();
@@ -20,7 +19,7 @@ public class ProductService {
 		return pobd.findByCategory(category);
 	}
 	
-	public List<Categorie> getAllCategories(){
+	public List<Category> getAllCategories(){
 		return pobd.findAllCategories();
 	}
 
@@ -28,7 +27,7 @@ public class ProductService {
 		return pobd.findAllOnSale();
 	}
 
-	public Categorie getCategorie(String name) {
+	public Category getCategory(String name) {
 		return cad.findByName(name);
 	}
 
@@ -37,10 +36,10 @@ public class ProductService {
 	}
 
 	public boolean createProduct(int id, String name, double price, String description, String nameCategory) {
-		Categorie category = getCategorie(nameCategory);
+		Category category = getCategory(nameCategory);
 		try {
 			Product p = new Product(id, name, price, description);
-			p.setCategorie(category);
+			p.setCategory(category);
 			pobd.insertProduct(p);
 			return true;
 		} catch (NullPointerException e) {

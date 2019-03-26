@@ -6,7 +6,7 @@ public class Product{
 	private int id;
 	private double price;
 	private String description;
-	private Categorie categorie;
+	private Category category;
 
 
     public Product(String newName, double newPrice, String newDescription) {
@@ -38,8 +38,8 @@ public class Product{
 		return description;
 	}
 
-	public Categorie getCategorie() {
-		return categorie;
+	public Category getCategory() {
+		return category;
 	}
 
     public void setId(int id) {
@@ -58,8 +58,8 @@ public class Product{
 		this.description = description;
 	}
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

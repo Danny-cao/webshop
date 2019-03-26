@@ -1,20 +1,20 @@
 package model;
 
-public class Categorie {
+public class Category {
 
-    private String naam;
+    private String name;
 	private String description;
 	
-	public Categorie(String naam, String description) {
-		this.naam = naam;
+	public Category(String name, String description) {
+		this.name = name;
 		this.description = description;
 	}
 
-    public String getNaam() {
-		return naam;
+    public String getName() {
+		return name;
 	}
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setName(String naam) {
+		this.name = naam;
 	}
 	public String getDescription() {
 		return description;
