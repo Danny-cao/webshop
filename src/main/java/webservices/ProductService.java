@@ -1,11 +1,11 @@
 package webservices;
 
-import persistence.ProductOracleDAOImpl;
+import persistence.ProductPostgreSQLDAOImpl;
 import persistence.Product;
 import java.util.List;
 
 public class ProductService {
-	ProductOracleDAOImpl pobd = new ProductOracleDAOImpl();
+	ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
 	
 	public List<Product> getAllProducts(){
 		return pobd.findAll();

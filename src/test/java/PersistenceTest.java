@@ -2,7 +2,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import persistence.Product;
-import persistence.ProductOracleDAOImpl;
+import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should return all products on sale")
     void testGetItemsOnSale() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         List<Product> productsOnSale = productDao.findAllOnSale();
 
         // TODO: Check for on sale?
@@ -34,7 +34,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should return all products")
     void testGetItems() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         List<Product> products = productDao.findAll();
 
         for (Product p : products) {
@@ -54,7 +54,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should return all categories")
     void testGetCategories() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         List<String> categories = productDao.findAllCategories();
         assertNotNull(categories, "List of categories");
     }
@@ -62,7 +62,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should return a product containing provided ID")
     void testGetByID() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         List<Product> products = productDao.findAll();
 
         Product p = products.get(0);
@@ -74,7 +74,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should return a product containing provided name")
     void testGetByName() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         List<Product> products = productDao.findAll();
 
         Product p = products.get(0);
@@ -88,7 +88,7 @@ public class PersistenceTest {
     void testInsertProduct() {
         Product testProduct = new Product(9999, "Test Product", 20, "Test");
 
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         productDao.insertProduct(testProduct);
         Product sameTestProduct = productDao.findById(9999);
 
@@ -99,7 +99,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should update test product in database")
     void testUpdateProduct() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         Product testProduct = productDao.findById(9999);
 
         testProduct.setName("Updated Test Product");
@@ -116,7 +116,7 @@ public class PersistenceTest {
     @Test
     @DisplayName("Should delete test product in database")
     void testDeleteProduct() {
-        ProductOracleDAOImpl productDao = new ProductOracleDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         Product testProduct = productDao.findById(9999);
         productDao.updateProduct(testProduct);
 
