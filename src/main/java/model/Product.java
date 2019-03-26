@@ -1,6 +1,4 @@
-package persistence;
-
-import java.util.List;
+package model;
 
 public class Product{
 	// TODO: Hoe kan je laten zien wat in de aanbieding is? Before en After prijs? Misschien fixen door nieuwe klasse "Aanbieding"

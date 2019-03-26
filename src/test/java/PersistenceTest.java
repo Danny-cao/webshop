@@ -2,8 +2,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import persistence.Categorie;
-import persistence.Product;
+import model.Categorie;
+import model.Product;
 import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;

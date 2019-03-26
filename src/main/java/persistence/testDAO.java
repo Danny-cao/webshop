@@ -1,6 +1,8 @@
 package persistence;
 
 
+import model.Product;
+
 public class testDAO {
 	public static void main(String[] args){
 		ProductPostgreSQLDAOImpl prodDAO = new ProductPostgreSQLDAOImpl();

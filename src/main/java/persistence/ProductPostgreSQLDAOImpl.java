@@ -1,5 +1,8 @@
 package persistence;
 
+import model.Categorie;
+import model.Product;
+
 import java.sql.Connection;
 import java.sql.*;
 import java.util.List;

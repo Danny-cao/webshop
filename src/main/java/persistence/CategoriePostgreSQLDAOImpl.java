@@ -1,12 +1,12 @@
 package persistence;
 
+import model.Categorie;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-public class CategorieOracleDAOImpl extends OracleBaseDao implements CategorieDAO{
+public class CategoriePostgreSQLDAOImpl extends PostgreSQLBaseDao implements CategorieDAO {
 	
 	
 	@Override

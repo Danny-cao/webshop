@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Product;
+
 import java.util.List;
 
 interface ProductDAO {

@@ -12,8 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import persistence.Categorie;
-import persistence.Product;
+import model.Categorie;
+import model.Product;
 
 @Path("category")
 public class CategoryRecource {

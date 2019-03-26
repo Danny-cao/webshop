@@ -1,14 +1,15 @@
 package webservices;
 
-import persistence.ProductOracleDAOImpl;
-import persistence.Categorie;
-import persistence.CategorieOracleDAOImpl;
-import persistence.Product;
+import model.Categorie;
+import persistence.CategoriePostgreSQLDAOImpl;
+import model.Product;
+import persistence.ProductPostgreSQLDAOImpl;
+
 import java.util.List;
 
 public class ProductService {
-	ProductOracleDAOImpl pobd = new ProductOracleDAOImpl();
-	CategorieOracleDAOImpl cad = new CategorieOracleDAOImpl();
+	private ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
+	private CategoriePostgreSQLDAOImpl cad = new CategoriePostgreSQLDAOImpl();
 	
 	public List<Product> getAllProducts(){
 		return pobd.findAll();
