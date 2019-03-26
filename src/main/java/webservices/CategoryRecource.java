@@ -1,5 +1,7 @@
 package webservices;
 
+import java.util.List;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -8,24 +10,21 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
+import persistence.Categorie;
 import persistence.Product;
 
 @Path("category")
 public class CategoryRecource {
 	@GET
 	@Produces("application/json")
-	public String  getAllCategories() {
+	public Response getAllCategories() {
 		ProductService service = ServiceProvider.getProductService();
-		JsonArrayBuilder jab = Json.createArrayBuilder();
-		for (String category : service.getAllCategories()) {
-			JsonObjectBuilder con = Json.createObjectBuilder();
-			con.add("category", category);
-			jab.add(con);
-		}
-
-		JsonArray array = jab.build();
-		return array.toString();
+		
+		List<Categorie> cat = service.getAllCategories();
+		
+		return Response.ok(cat).build();
 	}
 	
 	

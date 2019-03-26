@@ -1,11 +1,14 @@
 package webservices;
 
-import persistence.ProductPostgreSQLDAOImpl;
+import persistence.ProductOracleDAOImpl;
+import persistence.Categorie;
+import persistence.CategorieOracleDAOImpl;
 import persistence.Product;
 import java.util.List;
 
 public class ProductService {
-	ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
+	ProductOracleDAOImpl pobd = new ProductOracleDAOImpl();
+	CategorieOracleDAOImpl cad = new CategorieOracleDAOImpl();
 	
 	public List<Product> getAllProducts(){
 		return pobd.findAll();
@@ -15,12 +18,16 @@ public class ProductService {
 		return pobd.findByCategory(category);
 	}
 	
-	public List<String> getAllCategories(){
+	public List<Categorie> getAllCategories(){
 		return pobd.findAllCategories();
 	}
 
 	public List<Product> getAllProductsOnSale() {
 		return pobd.findAllOnSale();
+	}
+
+	public Categorie getCategorie(String name) {
+		return cad.findByName(name);
 	}
 }
 
