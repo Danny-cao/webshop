@@ -21,7 +21,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             while (dbResultSet.next()) {
                 int id = dbResultSet.getInt("id");
                 String name = dbResultSet.getString("naam");
-                int price = dbResultSet.getInt("prijs");
+                double price = dbResultSet.getDouble("prijs");
                 String description = dbResultSet.getString("beschrijving");
                 Product prod = new Product(id, name, price, description);
                 products.add(prod);
@@ -41,7 +41,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             while (dbResultSet.next()) {
                 int id = dbResultSet.getInt("id");
                 String name = dbResultSet.getString("naam");
-                int price = dbResultSet.getInt("prijs");
+                double price = dbResultSet.getDouble("prijs");
                 String description = dbResultSet.getString("beschrijving");
                 Product prod = new Product(id, name, price, description);
                 products.add(prod);
@@ -66,12 +66,14 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     public List<Product> findByCategory(String category) {
         List<Product> products = new ArrayList<Product>();
         try (Connection con = super.getConnection()) {
-            Statement stmt = con.createStatement();
-            ResultSet dbResultSet = stmt.executeQuery("select * from product where categorie = '" + category + "'");
+            String query = "select * from product where categorie = ?;";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, category);
+            ResultSet dbResultSet = stmt.executeQuery();
             while (dbResultSet.next()) {
                 int id = dbResultSet.getInt("id");
                 String name = dbResultSet.getString("naam");
-                int price = dbResultSet.getInt("prijs");
+                double price = dbResultSet.getDouble("prijs");
                 String description = dbResultSet.getString("beschrijving");
                 Product prod = new Product(id, name, price, description);
                 products.add(prod);
@@ -100,18 +102,66 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     }
 
     public boolean insertProduct(Product product) {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Connection conn = super.getConnection();
+            String query = "INSERT INTO product (naam, prijs, categorie, beschrijving)" +
+                    "VALUES (?, ?, ?, ?);";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setString(3, product.getCategorie().getNaam());
+            stmt.setString(4, product.getDescription());
+
+            boolean status = stmt.execute();
+            conn.close();
+            return status;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean updateProduct(Product product) {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Connection conn = super.getConnection();
+            String query = "update product " +
+                    "set naam = ?, prijs = ?, categorie = ?, beschrijving = ?" +
+                    "where id = ?;";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setString(3, product.getCategorie().getNaam());
+            stmt.setString(4, product.getDescription());
+            stmt.setInt(5, product.getId());
+
+            boolean status = stmt.execute();
+            conn.close();
+            return status;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean deleteProduct(Product product) {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Connection conn = super.getConnection();
+
+            String query = "delete from product where id = ?;";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, product.getId());
+
+            boolean status = stmt.execute();
+            conn.close();
+            return status;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

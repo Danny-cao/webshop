@@ -1,16 +1,16 @@
 package model;
 
 public class Categorie {
-	
-	private String naam;
+
+    private String naam;
 	private String description;
 	
 	public Categorie(String naam, String description) {
 		this.naam = naam;
 		this.description = description;
 	}
-	
-	public String getNaam() {
+
+    public String getNaam() {
 		return naam;
 	}
 	public void setNaam(String naam) {

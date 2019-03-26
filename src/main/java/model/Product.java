@@ -4,12 +4,12 @@ public class Product{
 	// TODO: Hoe kan je laten zien wat in de aanbieding is? Before en After prijs? Misschien fixen door nieuwe klasse "Aanbieding"
 	private String name;
 	private int id;
-	// TODO: Price moet double zijn, anders kan je niet achter de komma gaan
-	private int price;
+	private double price;
 	private String description;
-	
-	
-	public Product(int newId, String newName, int newPrice, String newDescription) {
+	private Categorie categorie;
+
+
+	public Product(int newId, String newName, double newPrice, String newDescription) {
 		this.id = newId;
 		this.name = newName;
 		this.price = newPrice;
@@ -23,13 +23,17 @@ public class Product{
 	public int getId() {
 		return id;
 	}
-	
-	public int getPrice() {
+
+	public double getPrice() {
 		return price;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
 	public void setName(String name) {
@@ -42,6 +46,10 @@ public class Product{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	@Override

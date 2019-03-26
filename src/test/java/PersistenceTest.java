@@ -43,7 +43,7 @@ public class PersistenceTest {
             int id = p.getId();
             String name = p.getName();
             // TODO: Moet Double zijn
-            int price = p.getPrice();
+            double price = p.getPrice();
             String description = p.getDescription();
 
             System.out.println(p.getName());
