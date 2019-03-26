@@ -32,6 +32,10 @@ public class ProductService {
 		return cad.findByName(name);
 	}
 
+	public Product getProductById(int id) {
+		return pobd.findById(id);
+	}
+
 	public boolean createProduct(int id, String name, double price, String description, String nameCategory) {
 		Categorie category = getCategorie(nameCategory);
 		try {
