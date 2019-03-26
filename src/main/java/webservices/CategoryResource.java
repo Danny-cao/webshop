@@ -16,7 +16,7 @@ import model.Categorie;
 import model.Product;
 
 @Path("category")
-public class CategoryRecource {
+public class CategoryResource {
 	@GET
 	@Produces("application/json")
 	public Response getAllCategories() {
