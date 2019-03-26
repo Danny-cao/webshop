@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class PostgreSQLBaseDao {
 
-    private static final String DB_DRIV = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_URL = "jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC21";
+    private static final String DB_DRIV = "org.postgresql.Driver";
+    private static final String DB_URL = "jdbc:postgresql://82.169.24.131/webshop";
     private static final String DB_USER = "cursist";
     private static final String DB_PASS = "cursist4491";
 

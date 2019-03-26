@@ -17,7 +17,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
                     ("SELECT product.id, product.naam, product.afbeelding, product.categorie, product.beschrijving, aanbieding.prijs\n" +
                             "FROM product\n" +
                             "INNER JOIN aanbieding\n" +
-                            "ON product.id = aanbieding.product where sysdate < aanbieding.totdatum and sysdate > aanbieding.vandatum");
+                            "ON product.id = aanbieding.product where current_timestamp < aanbieding.totdatum and current_timestamp > aanbieding.vandatum");
             while (dbResultSet.next()) {
                 int id = dbResultSet.getInt("id");
                 String name = dbResultSet.getString("naam");
