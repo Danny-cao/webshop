@@ -73,9 +73,9 @@ public class AuthenticationResource {
 	}
 	
     @GET
-	@Path("/details/{jwt}")
+	@Path("/details")
 	@Produces("application/json")
-	public String getAccountDetails(@PathParam("jwt") String jwt) {
+	public String getAccountDetails(@FormParam("jwt") String jwt) {
     	AuthenticationService as = new AuthenticationService();
     	if (openToken(jwt) != null) {
     		String email = openToken(jwt);
