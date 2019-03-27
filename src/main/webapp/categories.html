@@ -38,6 +38,8 @@
 			</form>
 			<a href="user.html"><i class="material-icons">person</i></a>	
 			<a href="shoppingcart.html"><i class="material-icons" href="shoppingcart.html">shopping_cart</i></a>	
+			&nbsp;
+			<button class="btn btn-primary logout" type="submit">Logout</button>
 		</div>
 	</nav>
 	<h1>Categories</h1>
@@ -52,10 +54,15 @@
 	<script src="assets/js/core/bootstrap.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="assets/js/plugins/bootstrap-notify.js"></script>
+	<!-- Sweet Alert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- Own jQuery -->
 	<script src="js/general-page.js"></script>
 	<script src="js/categories-page.js"></script>
-	<script>getAllCategories(); addAllCategories();</script>
+	<!-- Shared JS -->
+	<script >getAllCategories();</script>
+	<!-- Page specific JS -->
+	<script>addAllCategories();</script>
 </body>
 
 </html>

@@ -99,7 +99,7 @@ function sendOrder(){
 	$.ajax({
 		url: 'restservices/order',
 		type: 'POST',
-		data: {order: completeOrder}
+		data: {order: completeOrder, accountId : sessionStorage.getItem("cusomterID")}
 	})
 	.done(function() {
 		sessionStorage.setItem("order","");

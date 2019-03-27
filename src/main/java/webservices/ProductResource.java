@@ -5,7 +5,6 @@ import javax.json.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-import model.Category;
 import model.Product;
 import persistence.CategoryPostgreSQLDAOImpl;
 import persistence.ProductPostgreSQLDAOImpl;
@@ -108,7 +107,7 @@ public class ProductResource {
 			ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
 			CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
-			Product product = new Product(id, name, price, picture, description);
+			Product product = new Product(id, name, price, picture);
 			product.setCategory(cpd.findByName(categoryString));
 
 			if (!ppd.update(product)) {
@@ -134,7 +133,7 @@ public class ProductResource {
 			ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
 			CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
-			Product product = new Product(id, name, price, picture, description);
+			Product product = new Product(id, name, price, picture);
 			product.setCategory(cpd.findByName(categoryString));
 
 			if (!ppd.delete(product)) {

@@ -11,15 +11,15 @@ public class ProductService {
 
 	private ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
 	private CategoryPostgreSQLDAOImpl cad = new CategoryPostgreSQLDAOImpl();
-	
+
 	public List<Product> getAllProducts(){
 		return pobd.findAll();
 	}
-	
+
 	public List<Product> getProductsByCategory(String category){
 		return pobd.findByCategory(category);
 	}
-	
+
 	public List<Category> getAllCategories(){
 		return pobd.findAllCategories();
 	}
@@ -53,4 +53,3 @@ public class ProductService {
 		}
 	}
 }
-

@@ -2,9 +2,37 @@ var urlParams = new URLSearchParams(window.location.search);
 var urlStringParam = urlParams.toString();
 
 
+function showSaleProduct(){
+	if (urlStringParam != null){
+		urlStringParam = urlStringParam.replace("=","");
+	}else{
+		$.notify({title: "<b>Oops!</b>", message: "There is no parameter given!"},{type: "danger"});
+	}
+	$.ajax({
+		url: 'restservices/sales/' + urlStringParam,
+		type: 'GET',
+		dataType: 'json'
+	})
+	.done(function(result) {
+		if (result != null){
+			console.log(result.product);
+			var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\"pictures/t-shirt01.jpeg\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+result.product.description+"</p><hr><p>&euro;"+result.price+"</p><a onclick=\"addToStorage()\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
+			$("#title").text(result.product.name);
+			$(".row").append(product);
+		}
+	})
+	.fail(function() {
+		showProduct();
+	})
+};
+
+
+
 function showProduct(){
 	if (urlStringParam != null){
 		urlStringParam = urlStringParam.replace("=","");
+	}else{
+		$.notify({title: "<b>Oops!</b>", message: "There is no parameter given!"},{type: "danger"});
 	}
 	$.ajax({
 		url: 'restservices/products/' + urlStringParam,
@@ -24,9 +52,6 @@ function showProduct(){
 	})
 };
 
-function bye(){
-	console.log("bye");
-}
 
 function addToStorage(){
 	var old = sessionStorage.getItem("order");
@@ -34,7 +59,7 @@ function addToStorage(){
 	if(old === null){ 
 		old = "";
 	};
-	sessionStorage.setItem("order", old + id);
+	sessionStorage.setItem("order", old + urlStringParam);
 };
 
 

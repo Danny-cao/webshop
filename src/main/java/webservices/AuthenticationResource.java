@@ -81,8 +81,6 @@ public class AuthenticationResource {
     	if (openToken(jwt) != null) {
     		String email = openToken(jwt);
     		Account acc = as.getAccount(email);
-    		int id = acc.getId();
-    		String adress = acc.getAdress();
     		JsonArrayBuilder jab = Json.createArrayBuilder();
 			JsonObjectBuilder con = Json.createObjectBuilder();
 			con.add("id", acc.getId());

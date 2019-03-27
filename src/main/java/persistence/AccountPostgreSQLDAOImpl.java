@@ -34,7 +34,7 @@ public class AccountPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Accou
         try {
             Connection conn = super.getConnection();
 
-            String queryText = "SELECT * FROM product WHERE email = ?;";
+            String queryText = "SELECT * FROM account WHERE email = ?;";
             PreparedStatement stmt = conn.prepareStatement(queryText);
             stmt.setString(1, email);
             ResultSet result = stmt.executeQuery();
@@ -48,7 +48,7 @@ public class AccountPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Accou
             conn.close();
             return a;
         } catch (SQLException e) {
-            System.out.println("Account with that email not found");
+            System.out.println(e);
             return null;
         }
 	}
