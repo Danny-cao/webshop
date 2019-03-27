@@ -10,6 +10,8 @@ interface ProductDAO {
 	Product findById(int id);
 
     Product findSingleProductByName(String name);
+    
+    List<Product> searchByString(String text);
 
     boolean insert(Product product);
 

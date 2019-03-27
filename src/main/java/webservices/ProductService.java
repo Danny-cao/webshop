@@ -39,6 +39,10 @@ public class ProductService {
 	public List<Product> findProducts(String string) {
 		return pobd.findProducts(string);
 	}
+	
+	public List<Product> findProductsByString(String text){
+		return pobd.searchByString(text);
+	}
 
 	public boolean createProduct(int id, String name, double price, String description, String nameCategory) {
 		Category category = getCategory(nameCategory);

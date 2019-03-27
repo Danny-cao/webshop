@@ -227,4 +227,28 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             return null;
         }
     }
+
+	@Override
+	public List<Product> searchByString(String text) {
+		
+        List<Product> products = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+        	
+        	String query = "SELECT * FROM product WHERE (length(?) = 0 OR lower(naam) LIKE lower(?))";
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            stmt.setString(1, text);
+            stmt.setString(2, "%" + text + "%");
+            
+            ResultSet dbResultSet = stmt.executeQuery();
+            
+            while (dbResultSet.next()) {
+                products.add(getProductOutResultset(dbResultSet));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return products;
+	}
 }

@@ -68,6 +68,18 @@ public class ProductResource {
 
 		return ja.toString();
 	}
+	
+	@GET
+	@Path("/searchproduct/{searchparam}")
+	@Produces("application/json")
+	public Response findProductsByString(@PathParam("searchparam") String searchparam) {
+		ProductService service = ServiceProvider.getProductService();
+		
+		List<Product> products = service.findProductsByString(searchparam);
+		
+		return Response.ok(products).build();
+	}
+	
 
 	@POST
 	@Path("/create")
