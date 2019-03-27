@@ -33,4 +33,20 @@ public class Order {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	@Override
+	public boolean equals(Object anderObject) {
+		boolean isEqual = false;
+
+		if (anderObject instanceof Order) {
+			Order anderOrder = (Order) anderObject;
+
+			if (this.id == anderOrder.getId() &&
+					this.account.equals(anderOrder.getAccount()) &&
+					this.address.equals(anderOrder.getAddress())) {
+				isEqual = true;
+			}
+		}
+		return isEqual;
+	}
 }

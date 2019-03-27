@@ -11,9 +11,9 @@ interface ProductDAO {
 
     Product findSingleProductByName(String name);
 
-	boolean insertProduct(Product product);
+    boolean insert(Product product);
 
-	boolean updateProduct(Product product);
+    boolean update(Product product);
 
-	boolean deleteProduct(Product product);
+    boolean delete(Product product);
 }

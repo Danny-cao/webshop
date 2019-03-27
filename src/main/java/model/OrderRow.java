@@ -56,5 +56,23 @@ public class OrderRow {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+
+	@Override
+	public boolean equals(Object anderObject) {
+		boolean isEqual = false;
+
+		if (anderObject instanceof OrderRow) {
+			OrderRow andereOrderRow = (OrderRow) anderObject;
+
+			if (this.id == andereOrderRow.getId() &&
+					this.order.equals(andereOrderRow.getOrder()) &&
+					this.product.equals(andereOrderRow.getProduct()) &&
+					this.count == andereOrderRow.getCount() &&
+					this.price == andereOrderRow.getPrice()) {
+				isEqual = true;
+			}
+		}
+		return isEqual;
+	}
 	
 }

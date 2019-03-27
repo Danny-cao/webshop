@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Sale {
 	
@@ -28,5 +29,16 @@ public class Sale {
 	
 	public float getPrice() {
 		return price;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Sale sale = (Sale) o;
+		return Float.compare(sale.getPrice(), getPrice()) == 0 &&
+				Objects.equals(getProduct(), sale.getProduct()) &&
+				Objects.equals(getBegin(), sale.getBegin()) &&
+				Objects.equals(getEnd(), sale.getEnd());
 	}
 }

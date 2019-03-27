@@ -4,10 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import model.Category;
 import model.Product;
-import persistence.CategoryPostgreSQLDAOImpl;
-import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
 
@@ -107,7 +104,7 @@ public class ProductPersistenceTest {
         insertTestProduct.setCategory(cpd.findByName("shirt"));
 
 
-        productDao.insertProduct(insertTestProduct);
+        productDao.insert(insertTestProduct);
         Product sameInsertTestProduct = productDao.findSingleProductByName("Test Product");
         insertTestProduct.setId(sameInsertTestProduct.getId());
 
@@ -119,7 +116,7 @@ public class ProductPersistenceTest {
         updateTestProduct.setName("Updated Test Product");
         updateTestProduct.setPrice(30);
         updateTestProduct.setDescription("Updated Test");
-        productDao.updateProduct(updateTestProduct);
+        productDao.update(updateTestProduct);
 
         Product sameUpdateTestProduct = productDao.findSingleProductByName("Updated Test Product");
 
@@ -127,7 +124,7 @@ public class ProductPersistenceTest {
                 ", other found in database using the name of the updated product");
 
         Product deleteTestProduct = productDao.findSingleProductByName("Updated Test Product");
-        productDao.deleteProduct(deleteTestProduct);
+        productDao.delete(deleteTestProduct);
 
         assertNull(productDao.findSingleProductByName("Updated Test Product"), "Trying to find product that was deleted");
     }
@@ -140,7 +137,7 @@ public class ProductPersistenceTest {
 
         Product p = new Product(0, "a", 1, "c");
         p.setCategory(cpd.findByName("shirt"));
-        assertFalse(productDao.updateProduct(p));
+        assertFalse(productDao.update(p));
     }
 
     @Test
@@ -151,10 +148,10 @@ public class ProductPersistenceTest {
 
         Product pZero = new Product("a", 0, "c");
         pZero.setCategory(cpd.findByName("shirt"));
-        assertFalse(productDao.insertProduct(pZero), "Inserting product with price zero");
+        assertFalse(productDao.insert(pZero), "Inserting product with price zero");
 
         Product pNegative = new Product("a", -1, "c");
         pNegative.setCategory(cpd.findByName("shirt"));
-        assertFalse(productDao.insertProduct(pNegative), "Inserting product with negative price");
+        assertFalse(productDao.insert(pNegative), "Inserting product with negative price");
     }
 }

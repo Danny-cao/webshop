@@ -45,7 +45,7 @@ public class ProductService {
 		try {
 			Product p = new Product(id, name, price, description);
 			p.setCategory(category);
-			pobd.insertProduct(p);
+			pobd.insert(p);
 			return true;
 		} catch (NullPointerException e) {
 			System.out.println("Category not found");

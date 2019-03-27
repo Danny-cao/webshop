@@ -147,7 +147,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
 
     }
 
-    public boolean insertProduct(Product product) {
+    public boolean insert(Product product) {
         try {
             Connection conn = super.getConnection();
             String query = "INSERT INTO product (naam, prijs, categorie, beschrijving)" +
@@ -168,7 +168,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         }
     }
 
-    public boolean updateProduct(Product product) {
+    public boolean update(Product product) {
         try {
             Connection conn = super.getConnection();
             String query = "update product " +
@@ -190,7 +190,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         }
     }
 
-    public boolean deleteProduct(Product product) {
+    public boolean delete(Product product) {
         try {
             Connection conn = super.getConnection();
 

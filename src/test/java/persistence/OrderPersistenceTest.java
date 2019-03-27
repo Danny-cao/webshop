@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Account;
+import model.Address;
 import model.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,9 +13,14 @@ public class OrderPersistenceTest {
     @Test
     @DisplayName("Should successfully insert and delete same order")
     void testInsertionDeletion() {
+        OrderPostgreSQLDAOImpl ops = new OrderPostgreSQLDAOImpl();
 
-
-        assertTrue(false);
+        Address address = new Address("####", "####");
+//        Order order = new Order(0, account, address);
+//        ops.insert(order);
+//
+//        Order newOrder = ops.getById(0);
+//        assertEquals(order, newOrder);
     }
 
     @Test

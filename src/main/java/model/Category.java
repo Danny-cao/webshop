@@ -22,4 +22,19 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public boolean equals(Object anderObject) {
+		boolean isEqual = false;
+
+		if (anderObject instanceof Category) {
+			Category andereCategory = (Category) anderObject;
+
+			if (this.name.equals(andereCategory.getName()) &&
+					this.description.equals(andereCategory.description)) {
+				isEqual = true;
+			}
+		}
+		return isEqual;
+	}
 }
