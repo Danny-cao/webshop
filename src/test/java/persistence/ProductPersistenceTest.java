@@ -89,7 +89,7 @@ public class ProductPersistenceTest {
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
 
         Product insertTestProduct = new Product("Test Product", 20, "test", "Test");
-        insertTestProduct.setCategory(cpd.findByName("shirt"));
+        insertTestProduct.setCategory(cpd.findByName("shoes"));
 
 
         productDao.insert(insertTestProduct);
@@ -124,7 +124,7 @@ public class ProductPersistenceTest {
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
         Product p = new Product(0, "a", 1, "b", "c");
-        p.setCategory(cpd.findByName("shirt"));
+        p.setCategory(cpd.findByName("shoes"));
         assertFalse(productDao.update(p));
     }
 
@@ -135,11 +135,11 @@ public class ProductPersistenceTest {
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
         Product pZero = new Product("a", 0, "b", "c");
-        pZero.setCategory(cpd.findByName("shirt"));
+        pZero.setCategory(cpd.findByName("shoes"));
         assertFalse(productDao.insert(pZero), "Inserting product with price zero");
 
         Product pNegative = new Product("a", -1, "b", "c");
-        pNegative.setCategory(cpd.findByName("shirt"));
+        pNegative.setCategory(cpd.findByName("shoes"));
         assertFalse(productDao.insert(pNegative), "Inserting product with negative price");
     }
 }
