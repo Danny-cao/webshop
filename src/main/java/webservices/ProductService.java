@@ -8,6 +8,7 @@ import persistence.ProductPostgreSQLDAOImpl;
 import java.util.List;
 
 public class ProductService {
+
 	private ProductPostgreSQLDAOImpl pobd = new ProductPostgreSQLDAOImpl();
 	private CategoryPostgreSQLDAOImpl cad = new CategoryPostgreSQLDAOImpl();
 	
@@ -33,6 +34,10 @@ public class ProductService {
 
 	public Product getProductById(int id) {
 		return pobd.findById(id);
+	}
+
+	public List<Product> findProducts(String string) {
+		return pobd.findProducts(string);
 	}
 
 	public boolean createProduct(int id, String name, double price, String description, String nameCategory) {

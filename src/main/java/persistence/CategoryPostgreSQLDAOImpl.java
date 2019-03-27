@@ -21,8 +21,8 @@ public class CategoryPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Cate
             ResultSet dbResultSet = stmt.executeQuery();
             dbResultSet.next();
 
-            String name = dbResultSet.getString("name");
-            String description = dbResultSet.getString("description");
+            String name = dbResultSet.getString("naam");
+            String description = dbResultSet.getString("omschrijving");
             
             return new Category(name, description);
             

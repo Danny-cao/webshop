@@ -103,6 +103,44 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             conn.close();
             return p;
         } catch (SQLException e) {
+            System.out.println("Product with name not found / More than 1 product found");
+            return null;
+        }
+    }
+
+    public List<Product> findProducts(String string) {
+        try {
+            Connection conn = super.getConnection();
+            CategoryPostgreSQLDAOImpl cpsd = new CategoryPostgreSQLDAOImpl();
+
+            String queryText = "SELECT * " +
+                    "FROM product " +
+                    "WHERE (length(?) = 0 OR lower(naam) LIKE lower(?)) and (? = 0 OR categorie = ?)";
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setString(1, string);
+            stmt.setString(2, string);
+            stmt.setString(3, string);
+            stmt.setString(4, string);
+            ResultSet result = stmt.executeQuery();
+
+            List<Product> products = new ArrayList<>();
+
+            while (result.next()) {
+                int id = result.getInt("id");
+                String name = result.getString("naam");
+                Double price = result.getDouble("prijs");
+                Category category = cpsd.findByName(result.getString("categorie"));
+                String description = result.getString("beschrijving");
+
+                Product p = new Product(id, name, price, description);
+                p.setCategory(category);
+
+                products.add(p);
+            }
+
+            conn.close();
+            return products;
+        } catch (SQLException e) {
             System.out.println("Product with name not found");
             return null;
         }
