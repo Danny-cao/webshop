@@ -6,21 +6,7 @@ function getAllCategories(){
 	.done(function(result) {
 		$.each(result, function(index, key) {
 			var category = String(key.name);
-			$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"category.html\" onclick=\"goToCategoryPage("+"'"+ category +"'"+")\">"+key.name+"</a>" );
+			$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"category.html?"+key.name+"\" >"+key.name+"</a>" );
 		})
 	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
-	});
-}
-
-function goToCategoryPage(category){
-	sessionStorage.setItem("category",category);
-}
-
-function goToProductPage(id){
-	sessionStorage.setItem("id",id);
 }

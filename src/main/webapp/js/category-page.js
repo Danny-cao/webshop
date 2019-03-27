@@ -1,15 +1,24 @@
-function showCategory(){
-	var category = sessionStorage.getItem("category");
+var urlParams = new URLSearchParams(window.location.search);
+var urlStringParam = urlParams.toString();
 
+function showCategory(){
+	if (urlStringParam != null){
+		urlStringParam = urlStringParam.replace("=","");
+	}else{
+		$.notify({title: "<b>Oops!</b>", message: "There is no parameter given!"},{type: "danger"});
+	}
 	$.ajax({
-		url: 'restservices/categories/' + category,
+		url: 'restservices/categories/' + urlStringParam,
 		type: 'GET',
 		dataType: 'json'
 	})
 	.done(function(result) {
+		if (result == null){
+			$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the category. Maybe try a correct parameter"},{type: "danger"});
+		}
 		var i = 0;
 		var row = "<div class=\"row\">";
-		var title = category;
+		var title = urlStringParam;
 		$("#title").text(title);
 		$.each(result, function(index, key) {
 			if (i < 5){;
@@ -26,10 +35,6 @@ function showCategory(){
 		});
 	})
 	.fail(function() {
-		$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the category. Try it again in 10 minutes."},{type: "danger"});
+		$.notify({title: "<b>Oops!</b>", message: "There has been an error connecting to the database. Try it again in 10 minutes."},{type: "danger"});
 	})
-	.always(function() {
-		console.log("complete");
-	});
-
 }
