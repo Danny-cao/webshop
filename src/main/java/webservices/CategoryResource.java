@@ -40,6 +40,7 @@ public class CategoryResource {
 			con.add("id", p.getId());
 			con.add("price", p.getPrice());
 			con.add("description", p.getDescription());
+			con.add("image", p.getPicture());
 			jab.add(con);
 		}
 

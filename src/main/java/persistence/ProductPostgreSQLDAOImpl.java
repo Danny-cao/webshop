@@ -137,7 +137,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving from categorie");
             while (dbResultSet.next()) {
                 categories.add(new Category(dbResultSet.getString("naam")
-                        , dbResultSet.getString("omschrijving")));
+                        , dbResultSet.getString("omschrijving"), dbResultSet.getString("afbeelding")));
             }
         } catch (Exception e) {
             e.printStackTrace();

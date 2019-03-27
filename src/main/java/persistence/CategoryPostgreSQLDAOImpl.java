@@ -15,7 +15,7 @@ public class CategoryPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Cate
 		
         try (Connection con = super.getConnection()) {
 
-            String query = "select naam, omschrijving from categorie where naam = ?";
+            String query = "select naam, omschrijving, afbeelding from categorie where naam = ?";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, nm);
             ResultSet dbResultSet = stmt.executeQuery();
@@ -23,8 +23,9 @@ public class CategoryPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Cate
 
             String name = dbResultSet.getString("naam");
             String description = dbResultSet.getString("omschrijving");
+            String image = dbResultSet.getString("afbeelding");
             
-            return new Category(name, description);
+            return new Category(name, description, image);
             
         } catch (Exception e) {
             e.printStackTrace();
