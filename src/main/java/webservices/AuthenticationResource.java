@@ -72,10 +72,11 @@ public class AuthenticationResource {
 	    return (claims.getSubject());
 	}
 	
-    @GET
-	@Path("/details/{jwt}")
-	@Produces("application/json")
-	public String getAccountDetails(@PathParam("jwt") String jwt) {
+    @POST
+	@Path("/details")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String getAccountDetails(@FormParam("jwt") String jwt) {
     	AuthenticationService as = new AuthenticationService();
     	if (openToken(jwt) != null) {
     		String email = openToken(jwt);

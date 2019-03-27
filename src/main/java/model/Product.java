@@ -27,6 +27,13 @@ public class Product{
     }
 
 
+	public Product(int id, String newName, double newPrice, String newDescription) {
+        this.id = id;
+        this.name = newName;
+        this.price = newPrice;
+        this.description = newDescription;
+	}
+
 	public String getPicture() {
         return picture;
     }
