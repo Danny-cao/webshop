@@ -2,6 +2,7 @@ package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ public class OrderRowPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Orde
 
 	@Override
 	public OrderRow insert(OrderRow orderRow) {
-		
+		System.out.println("reached");
+		System.out.println(orderRow.getPrice());
 		try (Connection con = getConnection()) {
 
 			String query = "INSERT INTO bestellingsregel (bestelling, product, aantal, prijs) VALUES(?, ?, ?, ?)";
@@ -22,6 +24,8 @@ public class OrderRowPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Orde
 			stmt.setInt(2, orderRow.getProduct().getId());
 			stmt.setInt(3, orderRow.getCount());
 			stmt.setDouble(4, orderRow.getPrice());
+			
+			stmt.executeUpdate();
 			
 			return orderRow;
 		} catch (SQLException sqle) {
