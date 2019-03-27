@@ -1,32 +1,26 @@
-var id = sessionStorage.getItem("id");
+var urlParams = new URLSearchParams(window.location.search);
+var urlStringParam = urlParams.toString();
 
-function hello(){
-	console.log("hello");
-}
 
 function showProduct(){
+	if (urlStringParam != null){
+		urlStringParam = urlStringParam.replace("=","");
+	}
 	$.ajax({
-		url: 'restservices/products',
+		url: 'restservices/products/' + urlStringParam,
 		type: 'GET',
 		dataType: 'json'
 	})
 	.done(function(result) {
-		for (let index in result){
-			let currentProduct = result[index];
-			if(currentProduct['id'] == id){
-				var title = currentProduct.name;
-				var productId = currentProduct.id;
-				var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\"pictures/t-shirt01.jpeg\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+currentProduct.description+"</p><hr><p>&euro;"+currentProduct.price+"</p><a onclick=\"addToStorage("+productId+")\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
-				$("#title").text(title);
-				$(".row").append(product);
-			}
+		if (result == null){
+			$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the product. Maybe try a correct parameter"},{type: "danger"});
 		}
+		var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\"pictures/t-shirt01.jpeg\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+result.description+"</p><hr><p>&euro;"+result.price+"</p><a onclick=\"addToStorage()\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
+		$("#title").text(result.name);
+		$(".row").append(product);
 	})
 	.fail(function() {
 		$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the product. Try it again in 10 minutes."},{type: "danger"});
-	})
-	.always(function() {
-		console.log("complete");
 	})
 };
 
@@ -34,13 +28,13 @@ function bye(){
 	console.log("bye");
 }
 
-function addToStorage(id){
-	var old = sessionStorage.getItem("item");
+function addToStorage(){
+	var old = sessionStorage.getItem("order");
 	console.log(old);
 	if(old === null){ 
 		old = "";
 	};
-	sessionStorage.setItem("item", old + id);
+	sessionStorage.setItem("order", old + id);
 };
 
 
