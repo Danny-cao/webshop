@@ -18,6 +18,14 @@ public class OrderRow {
 		this.price = price;
 	}
 	
+	public OrderRow(Order order, Product product, int count, float price) {
+		
+		this.order = order;
+		this.product = product;
+		this.count = count;
+		this.price = price;
+	}
+	
 	public int getId() {
 		return id;
 	}

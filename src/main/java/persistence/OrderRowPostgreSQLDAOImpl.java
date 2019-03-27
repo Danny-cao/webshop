@@ -17,7 +17,7 @@ public class OrderRowPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Orde
 			
 			Statement stmt = con.createStatement();
 
-			String query = "INSERT INTO bestellingsregel (bestelling, product, aantal, prijs) VALUES(1, 1, 2, 30)";
+			String query = "INSERT INTO bestellingsregel (bestelling, product, aantal, prijs) VALUES( "+ orderRow.getOrder().getId()+ " ,  " + orderRow.getProduct().getId() +", " + orderRow.getCount() + ", " + orderRow.getPrice()+")";
 			
 			stmt.executeUpdate(query);
 			
