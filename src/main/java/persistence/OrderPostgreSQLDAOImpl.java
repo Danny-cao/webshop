@@ -27,6 +27,8 @@ public class OrderPostgreSQLDAOImpl extends PostgreSQLBaseDao implements OrderDA
 			}
 	}
 
+    //TODO add deletion method
+
 	@Override
 	public Order getById(int id) {
 		// TODO Auto-generated method stub

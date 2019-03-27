@@ -69,6 +69,10 @@ public class ProductResource {
 		return ja.toString();
 	}
 
+	// TODO create product rest service
+	// TODO modify product rest service
+	// TODO delete product rest service
+
 	private JsonObjectBuilder createJsonObjectBuilder(Product p) {
 		JsonObjectBuilder con = Json.createObjectBuilder();
 

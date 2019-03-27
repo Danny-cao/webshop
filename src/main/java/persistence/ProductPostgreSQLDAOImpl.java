@@ -164,7 +164,6 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             conn.close();
             return status;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -187,7 +186,6 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             conn.close();
             return status;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -205,7 +203,6 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             conn.close();
             return status;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
