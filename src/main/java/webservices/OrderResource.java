@@ -23,8 +23,9 @@ public class OrderResource {
 	@POST
 	@Produces("application/json")
 	public Response confirmOrder(@FormParam("order") String orderList, 
-								 @FormParam("account") int accountId, 
-								 @FormParam("address") int addressId) {
+								 @FormParam("account") int accountId) {
+		
+		System.out.println(accountId);
 		
 		OrderService service = ServiceProvider.getOrderService();
 		ProductService pro = ServiceProvider.getProductService();
@@ -32,8 +33,8 @@ public class OrderResource {
 		
 		
 		//testdata
-		//accountId = 1;
-		addressId = 1;
+		accountId = 1;
+		int addressId = 1;
 		Order order = new Order(1, new Account(accountId), new Address(addressId, "street", "number"));
 		
 		Order newOrder = service.insert(order);
