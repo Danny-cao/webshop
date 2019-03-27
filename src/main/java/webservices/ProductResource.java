@@ -152,6 +152,7 @@ public class ProductResource {
 		con.add("name", p.getName());
 		con.add("id", p.getId());
 		con.add("price", p.getPrice());
+		con.add("image", p.getPicture());
 		con.add("categorie", p.getCategory().getName());
 		con.add("description", p.getDescription());
 
