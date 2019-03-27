@@ -43,7 +43,7 @@ public class ProductService {
 	public boolean createProduct(int id, String name, double price, String description, String nameCategory) {
 		Category category = getCategory(nameCategory);
 		try {
-			Product p = new Product(id, name, price, description);
+			Product p = new Product(String.valueOf(id), price, name, description);
 			p.setCategory(category);
 			pobd.insert(p);
 			return true;
