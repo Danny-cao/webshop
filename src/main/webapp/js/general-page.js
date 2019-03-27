@@ -6,7 +6,6 @@ function getAllCategories(){
 	.done(function(result) {
 		$.each(result, function(index, key) {
 			var category = String(key.name);
-			console.log(category);
 			$( "#dropdown" ).append( "<a class=\"dropdown-item\" href=\"category.html\" onclick=\"goToCategoryPage("+"'"+ category +"'"+")\">"+key.name+"</a>" );
 		})
 	})
