@@ -40,7 +40,7 @@ public class OrderResource {
 		Order newOrder = service.insert(order);
 		
 		//test order
-		orderList = "121212345";
+		//orderList = "121212345";
 		
 		// split into list
 		String [] strArr = orderList.split("");
