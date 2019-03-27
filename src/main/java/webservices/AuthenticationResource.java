@@ -73,7 +73,7 @@ public class AuthenticationResource {
 	}
 	
     @GET
-	@Path("/details")
+	@Path("/details/{jwt}")
 	@Produces("application/json")
 	public String getAccountDetails(@PathParam("jwt") String jwt) {
     	AuthenticationService as = new AuthenticationService();
