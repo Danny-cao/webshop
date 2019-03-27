@@ -2,12 +2,13 @@ package webservices;
 
 
 import javax.json.*;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
+import model.Category;
 import model.Product;
+import persistence.CategoryPostgreSQLDAOImpl;
+import persistence.ProductPostgreSQLDAOImpl;
 
 import java.util.List;
 
@@ -69,9 +70,82 @@ public class ProductResource {
 		return ja.toString();
 	}
 
-	// TODO create product rest service
-	// TODO modify product rest service
-	// TODO delete product rest service
+	@POST
+	@Path("/create")
+	@Consumes("application/json")
+	public Response createProduct(@FormParam("name") String name,
+								  @FormParam("price") double price,
+								  @FormParam("picture") String picture,
+								  @FormParam("category") String categoryString,
+								  @FormParam("description") String description) {
+		try {
+			ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
+			CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+			Product product = new Product(name, price, picture, description);
+			product.setCategory(cpd.findByName(categoryString));
+
+			if (!ppd.insert(product)) {
+				throw new Exception("Insertion of product is not succesful");
+			}
+
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.status(400).build();
+		}
+	}
+	
+	@PUT
+	@Path("/update")
+	@Consumes("application/json")
+	public Response updateProduct(@FormParam("name") String name,
+								  @FormParam("id") int id,
+								  @FormParam("price") double price,
+								  @FormParam("picture") String picture,
+								  @FormParam("category") String categoryString,
+								  @FormParam("description") String description) {
+		try {
+			ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
+			CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+			Product product = new Product(id, name, price, picture, description);
+			product.setCategory(cpd.findByName(categoryString));
+
+			if (!ppd.update(product)) {
+				throw new Exception("Update of product is not succesful");
+			}
+
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.status(400).build();
+		}
+	}
+
+	@DELETE
+	@Path("/delete")
+	@Consumes("application/json")
+	public Response deleteProduct(@FormParam("name") String name,
+								  @FormParam("id") int id,
+								  @FormParam("price") double price,
+								  @FormParam("picture") String picture,
+								  @FormParam("category") String categoryString,
+								  @FormParam("description") String description) {
+		try {
+			ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
+			CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+			Product product = new Product(id, name, price, picture, description);
+			product.setCategory(cpd.findByName(categoryString));
+
+			if (!ppd.delete(product)) {
+				throw new Exception("Deletion of product is not succesful");
+			}
+
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.status(400).build();
+		}
+	}
 
 	private JsonObjectBuilder createJsonObjectBuilder(Product p) {
 		JsonObjectBuilder con = Json.createObjectBuilder();

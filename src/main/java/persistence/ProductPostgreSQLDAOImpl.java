@@ -150,15 +150,16 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     public boolean insert(Product product) {
         try {
             Connection conn = super.getConnection();
-            String query = "INSERT INTO product (naam, prijs, categorie, beschrijving)" +
-                    "VALUES (?, ?, ?, ?);";
+            String query = "INSERT INTO product (naam, prijs, categorie, afbeelding, beschrijving)" +
+                    "VALUES (?, ?, ?, ?, ?);";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
             stmt.setString(3, product.getCategory().getName());
-            stmt.setString(4, product.getDescription());
+            stmt.setString(4, product.getPicture());
+            stmt.setString(5, product.getDescription());
 
             boolean status = stmt.execute();
             conn.close();
@@ -172,15 +173,16 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         try {
             Connection conn = super.getConnection();
             String query = "update product " +
-                    "set naam = ?, prijs = ?, categorie = ?, beschrijving = ?" +
+                    "set naam = ?, prijs = ?, categorie = ?, afbeelding = ?, beschrijving = ?" +
                     "where id = ?;";
 
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPrice());
             stmt.setString(3, product.getCategory().getName());
-            stmt.setString(4, product.getDescription());
-            stmt.setInt(5, product.getId());
+            stmt.setString(4, product.getPicture());
+            stmt.setString(5, product.getDescription());
+            stmt.setInt(6, product.getId());
 
             boolean status = stmt.execute();
             conn.close();
@@ -214,9 +216,10 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             int id = dbResultSet.getInt("id");
             String name = dbResultSet.getString("naam");
             double price = dbResultSet.getDouble("prijs");
+            String picture = dbResultSet.getString("picture");
             String description = dbResultSet.getString("beschrijving");
             Category category = cpd.findByName(dbResultSet.getString("categorie"));
-            Product p = new Product(id, name, price, description);
+            Product p = new Product(id, name, price, picture, description);
             p.setCategory(category);
             return p;
         } catch (SQLException e) {
