@@ -1,3 +1,5 @@
+package persistence;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit test for the database persistence
  */
-public class PersistenceTest {
+public class ProductPersistenceTest {
 
     @BeforeAll
     @DisplayName("setup")
@@ -54,14 +56,6 @@ public class PersistenceTest {
     }
 
     @Test
-    @DisplayName("Should return all categories")
-    void testGetCategories() {
-        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        List<Category> categories = productDao.findAllCategories();
-        assertNotNull(categories, "List of categories");
-    }
-
-    @Test
     @DisplayName("Should return a product containing provided ID")
     void testGetByID() {
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
@@ -71,6 +65,15 @@ public class PersistenceTest {
         Product sameP = productDao.findById(p.getId());
 
         assertEquals(p, sameP, "Same product, different way of getting them (findAll / getById)");
+    }
+
+    @Test
+    @DisplayName("Asking for a non-exsisting product, it should return null")
+    void testGetByWrongID() {
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
+        Product p = productDao.findById(0);
+
+        assertNull(p);
     }
 
     @Test
@@ -86,14 +89,24 @@ public class PersistenceTest {
     }
 
     @Test
+    @DisplayName("Asking for a non-exsisting product, it should return null")
+    void testGetByWrongName() {
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
+        Product p = productDao.findSingleProductByName("@&#%^#&*@%^#");
+
+        assertNull(p);
+    }
+
+    @Test
     @DisplayName("Should insert/update/delete new test product in database")
     void testInsertUpdateDeleteProduct() {
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
 
         Product insertTestProduct = new Product("Test Product", 20, "Test");
         insertTestProduct.setCategory(cpd.findByName("shirt"));
 
-        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
+
         productDao.insertProduct(insertTestProduct);
         Product sameInsertTestProduct = productDao.findSingleProductByName("Test Product");
         insertTestProduct.setId(sameInsertTestProduct.getId());
@@ -117,5 +130,31 @@ public class PersistenceTest {
         productDao.deleteProduct(deleteTestProduct);
 
         assertNull(productDao.findSingleProductByName("Updated Test Product"), "Trying to find product that was deleted");
+    }
+
+    @Test
+    @DisplayName("Should return false while trying to update a non-existing product, should return false")
+    void testUpdateFalseProduct() {
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
+        CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+        Product p = new Product(0, "a", 1, "c");
+        p.setCategory(cpd.findByName("shirt"));
+        assertFalse(productDao.updateProduct(p));
+    }
+
+    @Test
+    @DisplayName("Should return false while trying create a product with negative and zero as price")
+    void testZeroNegativePriceProduct() {
+        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
+        CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+        Product pZero = new Product("a", 0, "c");
+        pZero.setCategory(cpd.findByName("shirt"));
+        assertFalse(productDao.insertProduct(pZero), "Inserting product with price zero");
+
+        Product pNegative = new Product("a", -1, "c");
+        pNegative.setCategory(cpd.findByName("shirt"));
+        assertFalse(productDao.insertProduct(pNegative), "Inserting product with negative price");
     }
 }
