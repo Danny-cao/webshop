@@ -216,7 +216,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             int id = dbResultSet.getInt("id");
             String name = dbResultSet.getString("naam");
             double price = dbResultSet.getDouble("prijs");
-            String picture = dbResultSet.getString("picture");
+            String picture = dbResultSet.getString("afbeelding");
             String description = dbResultSet.getString("beschrijving");
             Category category = cpd.findByName(dbResultSet.getString("categorie"));
             Product p = new Product(id, name, price, picture, description);
