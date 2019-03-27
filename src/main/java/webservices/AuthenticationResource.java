@@ -6,18 +6,29 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.DatatypeConverter;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
+import model.Account;
+import model.Product;
 import persistence.AccountDAO;
 import persistence.AccountPostgreSQLDAOImpl;
 
@@ -31,9 +42,9 @@ public class AuthenticationResource {
 	public Response authenticateUser(@FormParam("email") String email, @FormParam("password") String password) {
 		try {
 			AccountDAO dao = new AccountPostgreSQLDAOImpl();
-			if (dao.validateLogin(email, password) != true) {
+			if (dao.validateLogin(email, password) == true) {
 				String token = createToken(email);
-				SimpleEntry<String, String> JWT = new SimpleEntry<String, String>("JWT", token);				
+				SimpleEntry<String, String> JWT = new SimpleEntry<String, String>("JWT", token);
 				return Response.ok(JWT).build();
 			}
 		} catch (JwtException | IllegalArgumentException e) {
@@ -53,5 +64,37 @@ public class AuthenticationResource {
 			return JWT;
 		}
 	}
+	
+	public String openToken(String jwt) {
+	    Claims claims = Jwts.parser()         
+	       .setSigningKey(DatatypeConverter.parseBase64Binary("brocoli"))
+	       .parseClaimsJws(jwt).getBody();
+	    return (claims.getSubject());
+	}
+	
+    @GET
+	@Path("/details")
+	@Produces("application/json")
+	public String getAccountDetails(@PathParam("jwt") String jwt) {
+    	AuthenticationService as = new AuthenticationService();
+    	if (openToken(jwt) != null) {
+    		String email = openToken(jwt);
+    		Account acc = as.getAccount(email);
+    		int id = acc.getId();
+    		String adress = acc.getAdress();
+    		JsonArrayBuilder jab = Json.createArrayBuilder();
+			JsonObjectBuilder con = Json.createObjectBuilder();
+			con.add("id", acc.getId());
+			con.add("adress", acc.getAdress());
+			con.add("email", acc.getEmail());
+			jab.add(con);
+
+    		JsonArray array = jab.build();
+    		return array.toString();
+    	}
+    		return null;
+    	}
+
 }
+
 

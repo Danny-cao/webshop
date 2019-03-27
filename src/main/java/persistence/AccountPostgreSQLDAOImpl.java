@@ -3,6 +3,11 @@ package persistence;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import model.Account;
+import model.Category;
+import model.Product;
 
 
 public class AccountPostgreSQLDAOImpl extends PostgreSQLBaseDao implements AccountDAO{
@@ -22,6 +27,30 @@ public class AccountPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Accou
             e.printStackTrace();
         }
         return false;
+	}
+
+	@Override
+	public Account getAccountDetails(String email) {
+        try {
+            Connection conn = super.getConnection();
+
+            String queryText = "SELECT * FROM product WHERE email = ?;";
+            PreparedStatement stmt = conn.prepareStatement(queryText);
+            stmt.setString(1, email);
+            ResultSet result = stmt.executeQuery();
+
+            result.next();
+            int idNew = result.getInt("id");
+            String emailNew = result.getString("email");
+            String adressNew = result.getString("factuuradres");
+            Account a = new Account(idNew, emailNew, adressNew);
+
+            conn.close();
+            return a;
+        } catch (SQLException e) {
+            System.out.println("Account with that email not found");
+            return null;
+        }
 	}
 
 }

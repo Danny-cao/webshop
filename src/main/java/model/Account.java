@@ -7,7 +7,16 @@ public class Account {
 	private int id;
 	private String email;
 	private String password;
+	private String adress;
 
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
 
 	public Account(String email, String password) {
 
@@ -33,6 +42,12 @@ public class Account {
 
 	public Account(int id) {
 		this.id = id;
+	}
+
+	public Account(int idNew, String emailNew, String adressNew) {
+		this.id = idNew;
+		this.email = emailNew;
+		this.adress = adressNew;
 	}
 
 	public int getId() {

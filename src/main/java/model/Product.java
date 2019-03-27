@@ -8,6 +8,7 @@ public class Product{
     private String picture;
 	private String description;
 	private Category category;
+	private String adress;
 
 
     public Product(String newName, double newPrice, String picture, String newDescription) {
