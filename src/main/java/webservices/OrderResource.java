@@ -32,7 +32,7 @@ public class OrderResource {
 		
 		
 		//testdata
-		accountId = 1;
+		//accountId = 1;
 		addressId = 1;
 		Order order = new Order(1, new Account(accountId), new Address(addressId, "street", "number"));
 		
@@ -41,7 +41,7 @@ public class OrderResource {
 		System.out.println("orderid: " + newOrder.getId());
 		
 		//test order
-		orderList = "121212345";
+		//orderList = "121212345";
 		
 		// split into list
 		String [] strArr = orderList.split("");
@@ -77,7 +77,6 @@ public class OrderResource {
 			int count = 0;
 			
 			for(int n: numbers) {
-				System.out.println(n + " " + p.getId());
 				if(p.getId() == n) {
 					count++;
 				}
