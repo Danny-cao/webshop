@@ -76,7 +76,7 @@ public class AuthenticationResource {
 	@Path("/details")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public JsonObject getAccountDetails(@FormParam("jwt") String jwt) {
+	public String getAccountDetails(@FormParam("jwt") String jwt) {
     	AuthenticationService as = new AuthenticationService();
     	if (openToken(jwt) != null) {
     		String email = openToken(jwt);
@@ -86,7 +86,7 @@ public class AuthenticationResource {
 			con.add("adress", acc.getAdress());
 			con.add("email", acc.getEmail());
     		JsonObject array = con.build();
-    		return array;
+    		return array.toString();
     	}
     		return null;
     	}
