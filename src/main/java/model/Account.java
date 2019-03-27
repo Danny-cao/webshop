@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Account {
 
 	private int id;
@@ -40,4 +42,14 @@ public class Account {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return getId() == account.getId() &&
+                Objects.equals(getEmail(), account.getEmail()) &&
+                Objects.equals(getPassword(), account.getPassword());
+    }
 }
