@@ -8,6 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Unit test for category database persistence
+ */
 public class CategoriePersistenceTest {
     @Test
     @DisplayName("Should return all categories")

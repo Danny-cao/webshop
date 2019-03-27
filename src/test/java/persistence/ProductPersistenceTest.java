@@ -11,26 +11,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for the database persistence
+ * Unit test for product database persistence
  */
 public class ProductPersistenceTest {
 
     @BeforeAll
     @DisplayName("setup")
     static void setup() {
-    }
-
-    @Test
-    @DisplayName("Should return all products on sale")
-    void testGetItemsOnSale() {
-        ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
-        List<Product> productsOnSale = productDao.findAllOnSale();
-
-        // TODO: Check for on sale?
-//        for (Product p : productsOnSale) {
-//
-//        }
-
     }
 
     @Test
@@ -49,6 +36,7 @@ public class ProductPersistenceTest {
             assertNotEquals(0, id, "ID of the product");
             assertNotNull(name, "Name of the product");
             assertNotEquals(0, price, "Price of the product");
+            assertTrue(0 < price, "This has to be above the zero");
         }
     }
 
@@ -100,7 +88,7 @@ public class ProductPersistenceTest {
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
 
-        Product insertTestProduct = new Product("Test Product", 20, "Test");
+        Product insertTestProduct = new Product("Test Product", 20, "test", "Test");
         insertTestProduct.setCategory(cpd.findByName("shirt"));
 
 
@@ -135,7 +123,7 @@ public class ProductPersistenceTest {
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
-        Product p = new Product(0, "a", 1, "c");
+        Product p = new Product(0, "a", 1, "b", "c");
         p.setCategory(cpd.findByName("shirt"));
         assertFalse(productDao.update(p));
     }
@@ -146,11 +134,11 @@ public class ProductPersistenceTest {
         ProductPostgreSQLDAOImpl productDao = new ProductPostgreSQLDAOImpl();
         CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
 
-        Product pZero = new Product("a", 0, "c");
+        Product pZero = new Product("a", 0, "b", "c");
         pZero.setCategory(cpd.findByName("shirt"));
         assertFalse(productDao.insert(pZero), "Inserting product with price zero");
 
-        Product pNegative = new Product("a", -1, "c");
+        Product pNegative = new Product("a", -1, "b", "c");
         pNegative.setCategory(cpd.findByName("shirt"));
         assertFalse(productDao.insert(pNegative), "Inserting product with negative price");
     }
