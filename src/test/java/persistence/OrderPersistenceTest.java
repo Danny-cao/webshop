@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit test for order database persistence
+ */
 public class OrderPersistenceTest {
 
     @Test
@@ -15,12 +18,7 @@ public class OrderPersistenceTest {
     void testInsertionDeletion() {
         OrderPostgreSQLDAOImpl ops = new OrderPostgreSQLDAOImpl();
 
-        Address address = new Address("####", "####");
-//        Order order = new Order(0, account, address);
-//        ops.insert(order);
-//
-//        Order newOrder = ops.getById(0);
-//        assertEquals(order, newOrder);
+        // Succesful creation testing not possible with current functions
     }
 
     @Test
@@ -38,7 +36,6 @@ public class OrderPersistenceTest {
         OrderPostgreSQLDAOImpl opd = new OrderPostgreSQLDAOImpl();
         Order o = opd.getById(0);
 
-        // GetByID not done yet -> test always fails
-        assertNotNull(null);
+        assertEquals(0, o.getId());
     }
 }

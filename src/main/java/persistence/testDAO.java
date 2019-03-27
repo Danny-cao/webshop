@@ -5,11 +5,10 @@ import model.Product;
 
 public class testDAO {
 	public static void main(String[] args){
-		ProductPostgreSQLDAOImpl prodDAO = new ProductPostgreSQLDAOImpl();
-
-		for (Product p : prodDAO.findAllOnSale()) {
-			System.out.println(p.getName() + p.getPrice());
-		}
+		AccountDAO accDAO = new AccountPostgreSQLDAOImpl();
+		System.out.println(accDAO.validateLogin("test@test.nl", "test"));
+		System.out.println(accDAO.validateLogin("test@tesst.nl", "test"));
+		System.out.println(accDAO.validateLogin("test@test.nl", "tes2t"));
 	}
 
 }
