@@ -1,5 +1,5 @@
 package persistence;
 
 public interface AccountDAO {
-	boolean validateLogin();
+	boolean validateLogin(String email, String password);
 }
