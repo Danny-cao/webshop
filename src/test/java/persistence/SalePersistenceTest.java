@@ -21,7 +21,7 @@ public class SalePersistenceTest {
         SalePostgreSQLDAOImpl spd = new SalePostgreSQLDAOImpl();
         ProductPostgreSQLDAOImpl ppd = new ProductPostgreSQLDAOImpl();
 
-        Product testProduct = ppd.findById(2);
+        Product testProduct = ppd.findById(63);
         Sale sale = spd.findByProduct(testProduct);
         assertNotNull(sale, "Should be not null, finding a sale");
 

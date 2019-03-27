@@ -17,13 +17,6 @@ public class Product{
         this.picture = picture;
 		this.description = newDescription;
 	}
-    
-    public Product(int id, String newName, double newPrice, String newDescription) {
-        this.id = id;
-        this.name = newName;
-        this.price = newPrice;
-        this.description = newDescription;
-    }
 
     public Product(int id, String newName, double newPrice, String picture, String newDescription) {
         this.id = id;

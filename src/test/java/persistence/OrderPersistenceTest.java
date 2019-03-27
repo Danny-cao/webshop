@@ -36,6 +36,6 @@ public class OrderPersistenceTest {
         OrderPostgreSQLDAOImpl opd = new OrderPostgreSQLDAOImpl();
         Order o = opd.getById(0);
 
-        assertEquals(0, o.getId());
+        assertNull(o);
     }
 }
