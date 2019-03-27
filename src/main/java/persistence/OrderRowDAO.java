@@ -7,7 +7,7 @@ import model.OrderRow;
 
 public interface OrderRowDAO {
 	
-	OrderRow insert();
+	OrderRow insert(OrderRow orderRow);
 	ArrayList<OrderRow> getByOrder(Order order); 
 
 }
