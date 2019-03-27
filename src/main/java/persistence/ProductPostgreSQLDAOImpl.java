@@ -134,10 +134,11 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         List<Category> categories = new ArrayList<Category>();
         try (Connection con = super.getConnection()) {
             Statement stmt = con.createStatement();
-            ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving from categorie");
+            ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving, afbeelding from categorie");
             while (dbResultSet.next()) {
                 categories.add(new Category(dbResultSet.getString("naam")
-                        , dbResultSet.getString("omschrijving"), dbResultSet.getString("afbeelding")));
+                        ,dbResultSet.getString("omschrijving")
+                        ,dbResultSet.getString("afbeelding")));
             }
         } catch (Exception e) {
             e.printStackTrace();
