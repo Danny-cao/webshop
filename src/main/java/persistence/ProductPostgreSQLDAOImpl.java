@@ -19,12 +19,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
                             "INNER JOIN aanbieding\n" +
                             "ON product.id = aanbieding.product where current_timestamp < aanbieding.totdatum and current_timestamp > aanbieding.vandatum");
             while (dbResultSet.next()) {
-                int id = dbResultSet.getInt("id");
-                String name = dbResultSet.getString("naam");
-                double price = dbResultSet.getDouble("prijs");
-                String description = dbResultSet.getString("beschrijving");
-                Product prod = new Product(id, name, price, description);
-                products.add(prod);
+                products.add(getProductOutResultset(dbResultSet));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,17 +29,12 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     }
 
     public List<Product> findAll() {
-        List<Product> products = new ArrayList<Product>();
+        List<Product> products = new ArrayList<>();
         try (Connection con = super.getConnection()) {
             Statement stmt = con.createStatement();
             ResultSet dbResultSet = stmt.executeQuery("select * from product");
             while (dbResultSet.next()) {
-                int id = dbResultSet.getInt("id");
-                String name = dbResultSet.getString("naam");
-                double price = dbResultSet.getDouble("prijs");
-                String description = dbResultSet.getString("beschrijving");
-                Product prod = new Product(id, name, price, description);
-                products.add(prod);
+                products.add(getProductOutResultset(dbResultSet));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,21 +46,14 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
     public Product findById(int id) {
         try {
             Connection conn = super.getConnection();
-            CategoryPostgreSQLDAOImpl cpsd = new CategoryPostgreSQLDAOImpl();
 
-            String queryText = "SELECT naam, prijs, categorie, beschrijving FROM product WHERE id = ?;";
+            String queryText = "SELECT * FROM product WHERE id = ?;";
             PreparedStatement stmt = conn.prepareStatement(queryText);
             stmt.setInt(1, id);
             ResultSet result = stmt.executeQuery();
             System.out.println(result.next());
 
-            String naam = result.getString("naam");
-            Double prijs = result.getDouble("prijs");
-            Category category = cpsd.findByName(result.getString("categorie"));
-            String beschrijving = result.getString("beschrijving");
-
-            Product p = new Product(id, naam, prijs, beschrijving);
-            p.setCategory(category);
+            Product p = getProductOutResultset(result);
 
             conn.close();
             return p;
@@ -85,20 +68,13 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             Connection conn = super.getConnection();
             CategoryPostgreSQLDAOImpl cpsd = new CategoryPostgreSQLDAOImpl();
 
-            String queryText = "SELECT id, prijs, categorie, beschrijving FROM product WHERE naam = ?;";
+            String queryText = "SELECT * FROM product WHERE naam = ?;";
             PreparedStatement stmt = conn.prepareStatement(queryText);
             stmt.setString(1, name);
             ResultSet result = stmt.executeQuery();
 
             result.next();
-
-            int id = result.getInt("id");
-            Double prijs = result.getDouble("prijs");
-            Category category = cpsd.findByName(result.getString("categorie"));
-            String beschrijving = result.getString("beschrijving");
-
-            Product p = new Product(id, name, prijs, beschrijving);
-            p.setCategory(category);
+            Product p = getProductOutResultset(result);
 
             conn.close();
             return p;
@@ -126,16 +102,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             List<Product> products = new ArrayList<>();
 
             while (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("naam");
-                Double price = result.getDouble("prijs");
-                Category category = cpsd.findByName(result.getString("categorie"));
-                String description = result.getString("beschrijving");
-
-                Product p = new Product(id, name, price, description);
-                p.setCategory(category);
-
-                products.add(p);
+                products.add(getProductOutResultset(result));
             }
 
             conn.close();
@@ -154,12 +121,7 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             stmt.setString(1, category);
             ResultSet dbResultSet = stmt.executeQuery();
             while (dbResultSet.next()) {
-                int id = dbResultSet.getInt("id");
-                String name = dbResultSet.getString("naam");
-                double price = dbResultSet.getDouble("prijs");
-                String description = dbResultSet.getString("beschrijving");
-                Product prod = new Product(id, name, price, description);
-                products.add(prod);
+                products.add(getProductOutResultset(dbResultSet));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +136,8 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
             Statement stmt = con.createStatement();
             ResultSet dbResultSet = stmt.executeQuery("select naam, omschrijving from categorie");
             while (dbResultSet.next()) {
-                categories.add(new Category(dbResultSet.getString("naam"), dbResultSet.getString("omschrijving")));
+                categories.add(new Category(dbResultSet.getString("naam")
+                        , dbResultSet.getString("omschrijving")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,6 +207,23 @@ public class ProductPostgreSQLDAOImpl extends PostgreSQLBaseDao implements Produ
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private Product getProductOutResultset(ResultSet dbResultSet) {
+        try {
+            CategoryPostgreSQLDAOImpl cpd = new CategoryPostgreSQLDAOImpl();
+
+            int id = dbResultSet.getInt("id");
+            String name = dbResultSet.getString("naam");
+            double price = dbResultSet.getDouble("prijs");
+            String description = dbResultSet.getString("beschrijving");
+            Category category = cpd.findByName(dbResultSet.getString("categorie"));
+            Product p = new Product(id, name, price, description);
+            p.setCategory(category);
+            return p;
+        } catch (SQLException e) {
+            return null;
         }
     }
 }
