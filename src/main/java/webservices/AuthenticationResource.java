@@ -31,7 +31,7 @@ public class AuthenticationResource {
 	public Response authenticateUser(@FormParam("email") String email, @FormParam("password") String password) {
 		try {
 			AccountDAO dao = new AccountPostgreSQLDAOImpl();
-			if (dao.validateLogin(email, password) == true) {
+			if (dao.validateLogin(email, password) != true) {
 				String token = createToken(email);
 				SimpleEntry<String, String> JWT = new SimpleEntry<String, String>("JWT", token);				
 				return Response.ok(JWT).build();
