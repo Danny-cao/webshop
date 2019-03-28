@@ -44,7 +44,7 @@ function showProduct(){
 			$.notify({title: "<b>Oops!</b>", message: "There has been an error loading the product. Maybe try a correct parameter"},{type: "danger"});
 		}
 		var product = "<div class=\"col-md-12\"><div class=\"card\"><img class=\"card-img-top\" src=\""+result.image+"\" alt=\"Card image cap\"><div class=\"card-body\"><p class=\"card-text\">"+result.description+"</p><hr><p>&euro;"+result.price+"</p><a onclick=\"addToStorage()\" class=\"btn btn-primary float-right\">Add to shopping cart...</a></div></div></div>";
-		$("#title").text(result.name);
+		$(".title").text(result.name);
 		$(".row").append(product);
 	})
 	.fail(function() {

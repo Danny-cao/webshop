@@ -14,7 +14,7 @@ function getAllCategories(){
 function checkLogin(page) {
 	var jwt = sessionStorage.getItem("jwt");
 
-	if (name == undefined) {
+	if (jwt == undefined) {
 		if (page != 'index') {
 			window.location.href = 'index.html';
 			sessionStorage.clear();
@@ -42,4 +42,10 @@ $('.logout').click(function() {
 			window.location.href = 'sale.html';
 		}
 	});
+});
+
+$(".search").click(function(){
+	var search = $("#search").val();
+	sessionStorage.setItem("search", search);
+	window.location.href = "products.html";
 });
